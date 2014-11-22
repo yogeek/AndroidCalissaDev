@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -32,6 +33,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -135,6 +137,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
                 // Create a simple intent that starts the hierarchical parent activity and
                 // use NavUtils in the Support Package to ensure proper handling of Up.
                 Intent upIntent = new Intent(this, ReferenceDescriptionActivity.class);
+                upIntent.putExtras(objetbunble);
                 if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
                     // This activity is not part of the application's task, so create a new task
                     // with a synthesized back stack.
@@ -187,7 +190,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
     /**
      * A dummy fragment representing a section of the app, but that simply displays dummy text.
      */
-    public static class DemoObjectFragment extends Fragment {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN) public static class DemoObjectFragment extends Fragment {
 
         public static final String PHOTO_OBJECT = "photo";
         Bitmap bitmap;

@@ -110,8 +110,8 @@ public class Reference implements Parcelable {
 	 * 
 	 */
 	
-	public Reference(long id, String titreRef, String typeRef, String ville,
-			String quartier, String locVente, int loyerOuPrix, double surface, String vignette) {
+	public Reference(long id, String titreRef, String typeRef, String ville, 
+			String quartier, String locVente, int loyerOuPrix, double surface, String vignette, String description) {
 		this.id = id;
 		this.titreRef = titreRef;
 		this.typeRef = typeRef;
@@ -122,6 +122,7 @@ public class Reference implements Parcelable {
 		this.surface = surface;
 		this.vignette = vignette;
 		this.photos = new ArrayList<String>();
+		this.descriptif = description;
 	}
 	
 	public void addPhoto(String photo) {

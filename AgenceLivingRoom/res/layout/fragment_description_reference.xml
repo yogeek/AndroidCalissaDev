@@ -4,32 +4,36 @@
     android:layout_gravity="center">
     
     <TextView android:id="@+id/textTitreRef"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
         android:text="Titre de la référence"
+        android:textSize="20dp"
         />
 
     <ImageButton android:id="@+id/demo_collection_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textTitreRef"
         android:layout_marginBottom="16dp"
         android:text="Voir les photos"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo"
+        />
     
     <TextView android:id="@+id/textDescRef"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/demo_collection_button"
-        android:gravity="left"
         android:text="Description de la référence"
+        android:ellipsize="marquee"
         />
 
     <Button android:id="@+id/demo_external_activity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textDescRef"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
         android:text="Contacter le vendeur" />
 
 </RelativeLayout>

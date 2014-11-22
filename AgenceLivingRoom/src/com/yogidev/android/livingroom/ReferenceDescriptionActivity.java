@@ -163,6 +163,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 				fragment = new DetailsSectionFragment();
 				Bundle argsDetails = new Bundle();
 				argsDetails.putInt(DetailsSectionFragment.ARG_DETAILS_NUMBER, i + 1);
+				argsDetails.putParcelable(DescriptionSectionFragment.ARG_CURRENT_REF, mRef);
                 fragment.setArguments(argsDetails);
                 break;
 			case 2:
@@ -170,6 +171,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 				fragment = new CarteSectionFragment();
 				Bundle argsCarte = new Bundle();
 				argsCarte.putInt(CarteSectionFragment.ARG_CARTE_NUMBER, i + 1);
+				argsCarte.putParcelable(DescriptionSectionFragment.ARG_CURRENT_REF, mRef);
                 fragment.setArguments(argsCarte);
                 break;
 			default:
@@ -229,17 +231,28 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			
 			// Fill the main image 
 			ImageButton collectionButton = (ImageButton) rootView.findViewById(R.id.demo_collection_button);
-			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(ref.getVignette());
+//			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(ref.FirstPhoto());
+			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(CollectionGalleryActivity.photosList.get(0));
 			
 			// Fill the Description
 			TextView descView = (TextView) rootView.findViewById(R.id.textDescRef);
-			descView.setText(ref.getDescriptif());
+			String details = "";
+			String charges = "Charges";
+			if (ref.isLocation()) {
+				details += "Loyer hors charges:" + ref.getLoyerOuPrix() + "€\n";
+				charges += " copropriété:";  
+			}
+			details += charges + ref.getChargesOuCopro() + "€" + (ref.isLocation()?"/an":""); 
+			
+					
+			descView.setText(details);
 
 			// Demonstration of a collection-browsing activity.
-			rootView.findViewById(R.id.demo_collection_button).setOnClickListener(new View.OnClickListener() {
+			collectionButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					Intent intent = new Intent(getActivity(), CollectionGalleryActivity.class);
+					intent.putExtras(getActivity().getIntent().getExtras());
 					startActivity(intent);
 				}
 			});
@@ -270,13 +283,27 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 	public static class DetailsSectionFragment extends Fragment {
 
 		public static final String ARG_DETAILS_NUMBER = "details_number";
+		public static final String ARG_CURRENT_REF= "mCurrentRef";
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_details_reference, container, false);
 			Bundle args = getArguments();
-			((TextView) rootView.findViewById(android.R.id.text1)).setText(getString(R.string.dummy_section_text,args.getInt(ARG_DETAILS_NUMBER)));
+
+			Reference ref = args.getParcelable(ARG_CURRENT_REF);
+			
+			// Fill the Description
+			TextView descView = (TextView) rootView.findViewById(R.id.textDetailsRef);
+			descView.setText(ref.getDescriptif());
+			
+			// Fill the Equipment
+			if (ref.getListeEquipements() != null && ref.getListeEquipements().size() != 0) {
+				TextView eqtView = (TextView) rootView.findViewById(R.id.textEquipement);
+				eqtView.setText(eqtView.getText() + "\n" + ref.getListeEquipements().get(0));
+			}
+			
+			
 			return rootView;
 		}
 	}
@@ -287,6 +314,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 	public static class CarteSectionFragment extends Fragment {
 
 		public static final String ARG_CARTE_NUMBER = "carte_number";
+		public static final String ARG_CURRENT_REF= "mCurrentRef";
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
