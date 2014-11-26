@@ -28,6 +28,9 @@ public class SettingsActivity extends Activity {
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
 	    
+        // Set background
+        this.findViewById(android.R.id.content).setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
+        
 //	    setContentView(R.layout.settings);
 	    
 	    // Get the Action Bar 

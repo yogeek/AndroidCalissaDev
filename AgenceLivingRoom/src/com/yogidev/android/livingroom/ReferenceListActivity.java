@@ -47,8 +47,11 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	    // Inflate the view from XML
 	    setContentView(R.layout.reference_list_view);
 	    
+	    // Set background
+	    this.findViewById(R.id.containerReferenceList).setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
+	    
 		// set transparency 
-		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
+//		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
 	    
 	    // List View (accessible by getListView() since extends ListActivity)
 	    // or : mListView = (ListView) findViewById(android.R.id.list);
@@ -68,11 +71,11 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 		ArrayList<String> eqtList1 = new ArrayList<String>(Arrays.asList("Parking","Gardien"));
 		referenceList.get(0).setListeEquipements(eqtList1);
 		ArrayList<String> eqtList2 = new ArrayList<String>(Arrays.asList("Double vitrage","Parking"));
-		referenceList.get(0).setListeEquipements(eqtList2);
+		referenceList.get(1).setListeEquipements(eqtList2);
 		ArrayList<String> eqtList3 = new ArrayList<String>(Arrays.asList("Double vitrage","Gardien"));
-		referenceList.get(0).setListeEquipements(eqtList3);
+		referenceList.get(2).setListeEquipements(eqtList3);
 		ArrayList<String> eqtList4 = new ArrayList<String>(Arrays.asList("Parking"));
-		referenceList.get(0).setListeEquipements(eqtList4);
+		referenceList.get(3).setListeEquipements(eqtList4);
 		
         mAdapter = new ReferenceListAdapter(this, referenceList);
 //	    mListView.setAdapter(mAdapter);

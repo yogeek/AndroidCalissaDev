@@ -63,9 +63,9 @@ implements FragmentManager.OnBackStackChangedListener {
 		setContentView(R.layout.contact_card_flip);
 		
 		// set background layer
-		findViewById(R.id.container).setBackgroundColor(PreferencesManager.getInstance().getBackgoundColorPref());
+//		findViewById(R.id.containerContact).setBackgroundColor(PreferencesManager.getInstance().getBackgoundColorPref());
 		// set transparency 
-		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
+//		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
 
 		if (savedInstanceState == null) {
 			// If there is no saved instance state, add a fragment representing the
@@ -73,7 +73,7 @@ implements FragmentManager.OnBackStackChangedListener {
 			// this fragment will have already been added to the activity.
 			getFragmentManager()
 			.beginTransaction()
-			.add(R.id.container, new CardFrontFragment())
+			.add(R.id.containerContact, new CardFrontFragment())
 			.commit();
 		} else {
 			mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
@@ -145,7 +145,7 @@ implements FragmentManager.OnBackStackChangedListener {
 				// Replace any fragments currently in the container view with a fragment
 				// representing the next page (indicated by the just-incremented currentPage
 				// variable).
-				.replace(R.id.container, new CardBackFragment())
+				.replace(R.id.containerContact, new CardBackFragment())
 
 				// Add this transaction to the back stack, allowing users to press Back
 				// to get to the front of the card.
@@ -184,6 +184,7 @@ implements FragmentManager.OnBackStackChangedListener {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View view = inflater.inflate(R.layout.fragment_card_front, container, false);
+			view.setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
 			return view;
 		}
 	}
@@ -199,7 +200,8 @@ implements FragmentManager.OnBackStackChangedListener {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View view = inflater.inflate(R.layout.fragment_card_back, container, false);
-
+			view.setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
+			
 			Button button = (Button) view.findViewById(R.id.callButton);
 			// add button listener
 			button.setOnClickListener(new OnClickListener() {

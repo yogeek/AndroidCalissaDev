@@ -1,37 +1,102 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+
+<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
-    android:orientation="vertical"
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >   
-<ImageView 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="left"
-    android:src="@drawable/icone_fleche_blanche"
-    />
-<TextView
-    android:id="@+id/textDetailsRef"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="left"
-    android:text="Details de la reference"
-    />
-</LinearLayout>
+    android:layout_gravity="start"
+    android:layout_margin="10dp"
+    android:gravity="end"
+    android:orientation="vertical" >
 
-<TextView  
-    android:id="@+id/textEquipement"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_gravity="left"
-    android:text="Equipements de la reference"
-    android:drawableLeft="@drawable/icone_fleche_blanche" 
-    />
+	<TextView  
+	    android:id="@+id/textDetailsRef"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:layout_gravity="start"
+	    android:background="@drawable/prix_box_border"
+	    android:text="Détails de la reference"
+	    android:drawableLeft="@drawable/icone_fleche_blanche" 
+	    android:drawableStart="@drawable/icone_fleche_blanche" 
+	    />
+	
+	<TextView  
+	    android:id="@+id/textEquipement"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:layout_gravity="start"
+	    android:background="@drawable/prix_box_border"
+	    android:text="Equipements de la reference"
+	    android:drawableLeft="@drawable/icone_fleche_blanche" 
+	    android:drawableStart="@drawable/icone_fleche_blanche" 
+	    />
+	
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:padding="5dp"
+	    android:background="@drawable/prix_box_border"
+	    android:orientation="horizontal"
+	    android:weightSum="2" >
+	    
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="left"
+	        android:layout_marginLeft="5dp"
+	        android:orientation="vertical"
+	        android:layout_weight="1" >
+	
+			<TextView  
+			    android:id="@+id/textPerfEnergetique"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:text="Diagnostic de Performance Énergétique"
+			    android:drawableLeft="@drawable/icone_fleche_blanche" 
+			    android:drawableStart="@drawable/icone_fleche_blanche" 
+			    />
+			
+			<ImageView
+			    android:id="@+id/imgDpe"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:contentDescription="TODO"
+			    android:src="@drawable/dpe_c" />
+			
+		</LinearLayout>
+		
+	     <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:layout_gravity="right"
+	        android:layout_weight="1" >
+	
+			<TextView  
+			    android:id="@+id/textEmissionsGaz"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:text="Émissions de gaz à effet de serre"
+			    android:drawableLeft="@drawable/icone_fleche_blanche" 
+			    android:drawableStart="@drawable/icone_fleche_blanche" 
+			    />
+			
+			<ImageView
+			    android:id="@+id/imgGes" 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:contentDescription="TODO"
+			    android:src="@drawable/ges_e"
+			    />
+		
+		</LinearLayout>
+			
+	</LinearLayout>
 
 </LinearLayout>
+</ScrollView>

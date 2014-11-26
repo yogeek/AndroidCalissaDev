@@ -22,8 +22,8 @@ public class InfosActivity extends Activity {
 	    // Inflate the view from XML
 	    setContentView(R.layout.info);
 	    
-		// set transparency 
-		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
+	    // Set background
+	    findViewById(R.id.containerInfo).setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
 	    
 	    TextView textAdress = (TextView) findViewById(R.id.textInfoAdress);
 	    textAdress.setMovementMethod(LinkMovementMethod.getInstance());

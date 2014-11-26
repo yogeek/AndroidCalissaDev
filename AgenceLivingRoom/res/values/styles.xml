@@ -23,7 +23,8 @@
         <item name="android:actionBarStyle">@style/ActionBar.Light</item>
         <item name="android:windowActionBarOverlay">false</item>
         <item name="android:spinnerStyle">@style/Widget.Spinner</item>
-        <item name="android:windowBackground">@drawable/garonne</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:button">@android:style/ButtonBar</item>
     </style>
 
     <style name="AppTheme.Dark" parent="@android:style/Theme.Holo">
@@ -31,6 +32,7 @@
         <item name="android:windowActionBarOverlay">false</item>
         <item name="android:spinnerStyle">@style/Widget.Spinner</item>
         <item name="android:windowBackground">@drawable/canal_midi</item>
+        <item name="android:button">@android:style/ButtonBar</item>
     </style>    
     
 	<!-- style name="Transparent">

@@ -95,7 +95,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
         setContentView(R.layout.reference_collection_gallery);
         
 		// set transparency 
-		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
+//		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
 
         // Create an adapter that when requested, will return a fragment representing an object in
         // the collection.

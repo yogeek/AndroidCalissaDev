@@ -63,7 +63,7 @@ public class HomeActivity extends Activity {
 		getActionBar().setDisplayUseLogoEnabled(true);
 		
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
+			getFragmentManager().beginTransaction().add(R.id.containerHome, new PlaceholderFragment()).commit();
 		}
 	}
 	

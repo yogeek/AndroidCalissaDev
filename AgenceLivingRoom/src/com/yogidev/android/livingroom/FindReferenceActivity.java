@@ -49,9 +49,9 @@ public class FindReferenceActivity extends Activity {
 		setContentView(R.layout.find_reference);
 	    
 		// set background layer
-		findViewById(R.id.relativeFind).setBackgroundColor(PreferencesManager.getInstance().getBackgoundColorPref());
+		findViewById(R.id.containerFind).setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
 		// set transparency 
-		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
+		//getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
 	    
 		// Spinner Ville
 	    spinnerVille = (Spinner) findViewById(R.id.SpinnerVille);

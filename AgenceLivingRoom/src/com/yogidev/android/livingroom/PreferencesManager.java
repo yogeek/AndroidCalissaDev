@@ -4,6 +4,7 @@ package com.yogidev.android.livingroom;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.ColorDrawable;
 
 public class PreferencesManager {
 
@@ -22,7 +23,7 @@ public class PreferencesManager {
 	// Background color
 	public static final int BG_COLOR_LIGHT = R.color.actionbar_background_light;
 	public static final int BG_COLOR_DARK = R.color.actionbar_background_dark;
-
+	
 	private static final String THEME_INT_KEY = "THEME";
 	private static SharedPreferences mPreferences;
 	private static PreferencesManager mInstance;
@@ -52,8 +53,19 @@ public class PreferencesManager {
 	/**
 	 * Return the background color according to the current theme
 	 */
-	public int getBackgoundColorPref() {
-		return getThemePref()==THEME_LIGHT?BG_COLOR_LIGHT:BG_COLOR_DARK;
+	public ColorDrawable getBackgoundColorPref() {
+		ColorDrawable cd;
+		if (getThemePref()==THEME_LIGHT) {
+			cd = new ColorDrawable(LivingRoomApplication.mContext.getResources().getColor(BG_COLOR_LIGHT));
+			System.out.println("THEME LIGHT = " + BG_COLOR_LIGHT);
+		}
+		else {
+			cd = new ColorDrawable(LivingRoomApplication.mContext.getResources().getColor(BG_COLOR_DARK));
+			System.out.println("THEME DARK = " + BG_COLOR_DARK);
+			
+		}
+			
+		return cd;
 	}
 	
 	/**

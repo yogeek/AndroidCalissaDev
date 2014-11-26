@@ -50,11 +50,12 @@
 
 	            <Button
 	                android:id="@+id/button1"
+	                style="@android:style/ButtonBar"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="10dp"
-	                android:text="@string/trouverUnBien"
-	                android:onClick="onFindClicked" />
+	                android:onClick="onFindClicked"
+	                android:text="@string/trouverUnBien" />
 	        
 	        </LinearLayout>
             
@@ -75,6 +76,7 @@
 
 	            <Button
 	                android:id="@+id/button2"
+	                style="@android:style/ButtonBar"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="10dp"
@@ -113,6 +115,7 @@
 
 	            <Button
 	                android:id="@+id/button3"
+	                style="@android:style/ButtonBar"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="10dp"
@@ -138,6 +141,7 @@
 
 	            <Button
 	                android:id="@+id/button4"
+	                style="@android:style/ButtonBar"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="10dp"
