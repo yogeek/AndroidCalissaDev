@@ -7,17 +7,18 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class HomeActivity extends Activity {
@@ -26,16 +27,33 @@ public class HomeActivity extends Activity {
 	public static final int ABOUT_OPTIONS_CODE = 2;
 	public static final int FIND_REFERENCE_OPTIONS_CODE = 3;
 	public static final int CONTACT_CARD_OPTIONS_CODE = 4;
+	public static final int MAP_ACTIVITY_OPTIONS_CODE = 5;
 	
 	Bundle objetbunble;
 	
 	// L'identifiant de la chaîne de caractères qui contient le résultat de l'intent
 	public final static String SETTINGS_BUTTONS = "com.yogidev.android.intent.settings.Boutons";
 	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Reset Prefs
+//		PreferencesManager.getInstance().getPrefEditor().clear().commit();
+//		
+//		
+//		boolean isFullScreen = PreferencesManager.getInstance().getSharedPref().getBoolean(PreferencesManager.FULL_SCREEN_KEY, false);
+//		boolean isNotifOn = PreferencesManager.getInstance().getSharedPref().getBoolean(PreferencesManager.NOTIFICATION_KEY, false);
+//		
+//		Toast.makeText(this, "FULL SCREEN = " + isFullScreen, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, "NOTIF = " + isNotifOn, Toast.LENGTH_SHORT).show();
+		
+		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		if (SP.getBoolean("pref_key_full_screen_on",false)) {
+			hideSystemUI();
+		}
 		
 		// Restore pref theme
 		setTheme(PreferencesManager.getInstance().getThemePref());
@@ -98,6 +116,18 @@ public class HomeActivity extends Activity {
 		Intent intent = new Intent(HomeActivity.this, FindReferenceActivity.class);
 		intent.putExtras(objetbunble);
 		startActivityForResult(intent, FIND_REFERENCE_OPTIONS_CODE);
+	}
+	
+    /**
+     * Go to "MapActivity"
+     * 
+     * @param view
+     */
+	public void onCarteClicked(View view) {
+		// Launch ReferenceListActivity
+		Intent intent = new Intent(HomeActivity.this, MapActivity.class);
+		intent.putExtras(objetbunble);
+		startActivityForResult(intent, MAP_ACTIVITY_OPTIONS_CODE);
 	}
 	
 	/**
@@ -169,16 +199,22 @@ public class HomeActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
 		// On vérifie tout d'abord à quel intent on fait référence ici à l'aide de notre identifiant
-	    if (requestCode == SETTING_OPTIONS_CODE) {
-	      // On vérifie aussi que l'opération s'est bien déroulée
-	      if (resultCode == RESULT_OK) {
-	        // On affiche le bouton qui a été choisi
-	      	Toast.makeText(this, "Les notifications ont été " + ((data.getStringExtra(SETTINGS_BUTTONS).equals(SettingsActivity.NOTIFICATION_ON))?"activées":"désactivées"), Toast.LENGTH_SHORT).show();
-	      }
-	    }
-	    
-	    System.out.println("In IT !!");
-	    
+		switch (requestCode) {
+		case SETTING_OPTIONS_CODE:
+
+			SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+			boolean isFullScreenOn = SP.getBoolean("pref_key_full_screen_on", false);
+			boolean isNotificationOn = SP.getBoolean("pref_key_notification_on",false);
+
+			if (isFullScreenOn) {
+				hideSystemUI();
+			}
+
+			break;
+		}
+
+
 		// Restore pref theme
 		setTheme(PreferencesManager.getInstance().getThemePref());
 		
@@ -197,6 +233,15 @@ public class HomeActivity extends Activity {
 			}
 		}, 1);
 	}
+	
+	// This method hides the system bars and resize the content
+	public void hideSystemUI() {
+		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+				| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+				| View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+				// remove the following flag for version < API 19
+				| View.SYSTEM_UI_FLAG_IMMERSIVE); 
+	} 
 	
 	
 	/**

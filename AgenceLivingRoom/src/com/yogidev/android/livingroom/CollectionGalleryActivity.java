@@ -18,9 +18,6 @@ package com.yogidev.android.livingroom;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -50,16 +47,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.yogidev.android.livingroom.data.bean.Reference;
+
 
 public class CollectionGalleryActivity extends FragmentActivity {
-	
-	public static final List<String> photosList =   new ArrayList<String>(Arrays.asList(
-			"http://agence-livingroom.com/references/1100/photo_1037.jpg",
-			"http://agence-livingroom.com/references/1100/photo_1038.jpg",
-			"http://agence-livingroom.com/references/1100/photo_1040.jpg",
-			"http://agence-livingroom.com/references/1100/photo_1039.jpg",
-			"http://agence-livingroom.com/references/1100/photo_1041.jpg"
-			));
 	
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments representing
@@ -75,8 +66,12 @@ public class CollectionGalleryActivity extends FragmentActivity {
      */
     ViewPager mViewPager;
     
+    public static final String ARG_CURRENT_REF= "mCurrentRef";
+    
 	// The bundle to pass and receive data to and from other activities
 	Bundle objetbunble;
+	
+	Reference currentReference;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +81,14 @@ public class CollectionGalleryActivity extends FragmentActivity {
         
 	    // Get the Bundle sent by the previous activity
 	    objetbunble  = getIntent().getExtras();
-		
+	    
 	    // Create the bundle if null
 	    if (objetbunble == null) {
 	    	objetbunble = new Bundle();
 	    }
         
+	    currentReference = getIntent().getParcelableExtra("currentReference");
+	    
         setContentView(R.layout.reference_collection_gallery);
         
 		// set transparency 
@@ -102,7 +99,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
         // 
         // ViewPager and its adapters use support library fragments, so we must use
         // getSupportFragmentManager.
-        mDemoCollectionPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager());
+        mDemoCollectionPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager(), currentReference);
 
         // Set up action bar.
         final ActionBar actionBar = getActionBar();
@@ -161,16 +158,19 @@ public class CollectionGalleryActivity extends FragmentActivity {
      * representing an object in the collection.
      */
     public static class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
+    	
+    	Reference mReference;
 
-        public DemoCollectionPagerAdapter(FragmentManager fm) {
+        public DemoCollectionPagerAdapter(FragmentManager fm, Reference cRef) {
             super(fm);
+            mReference = cRef;
         }
 
         @Override
         public Fragment getItem(int i) {
             Fragment fragment = new DemoObjectFragment();
             Bundle args = new Bundle();
-            args.putString(DemoObjectFragment.PHOTO_OBJECT, photosList.get(i)); // Our object is the URL of the photo
+            args.putString(DemoObjectFragment.PHOTO_OBJECT, mReference.getPhotos().get(i)); // Our object is the URL of the photo
             fragment.setArguments(args);
             return fragment;
         }
@@ -178,7 +178,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
         @Override
         public int getCount() {
             // For this contrived example, we have a 10-object collection.
-            return photosList.size();
+            return mReference.getPhotos().size();
         }
 
         @Override

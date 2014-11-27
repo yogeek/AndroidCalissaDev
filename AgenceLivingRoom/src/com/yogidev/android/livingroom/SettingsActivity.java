@@ -3,9 +3,10 @@ package com.yogidev.android.livingroom;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -42,16 +43,26 @@ public class SettingsActivity extends Activity {
 	    // Set logo
 	    // actionBar.setLogo(R.drawable.rouages);
 	    
-	    // to display the icon and not the logo
-//	    actionBar.setDisplayUseLogoEnabled(false);
-//	    actionBar.setDisplayHomeAsUpEnabled(true);
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        boolean isFullScreenOn = SP.getBoolean("pref_key_full_screen_on", false);
+        boolean isNotificationOn = SP.getBoolean("pref_key_notification_on",false);
+        
+        if (isFullScreenOn) {
+        	Toast.makeText(this, "Passage en mode plein écran", Toast.LENGTH_SHORT).show();
+        	hideSystemUI();
+        }
+        
+        if (isNotificationOn) {
+        	Toast.makeText(this, "Les notifications sont activées", Toast.LENGTH_SHORT).show();
+        }
 	    
 	
 	}
 	
 	
 	// This method hides the system bars and resize the content
-	private void hideSystemUI() {
+	public void hideSystemUI() {
 		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 				| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
 				| View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
@@ -75,22 +86,6 @@ public class SettingsActivity extends Activity {
 	    	Toast.makeText(this, "Mode plein écran désactivé !", Toast.LENGTH_SHORT).show();
 	    }
 	}
-	
-	public void onValiderClicked(View view) {
-		
-		// Return notification choice
-    	Intent result = new Intent();
-        result.putExtra(HomeActivity.SETTINGS_BUTTONS, this.notificationChoice);
-        setResult(RESULT_OK, result);
-		finish();
-	}
-	
-	public void onAnnulerClicked(View view) {
-		
-		// Return 
-		finish();
-	}
-	
 	
 
 }

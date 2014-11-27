@@ -24,6 +24,10 @@ public class PreferencesManager {
 	public static final int BG_COLOR_LIGHT = R.color.actionbar_background_light;
 	public static final int BG_COLOR_DARK = R.color.actionbar_background_dark;
 	
+	// Full Screen mode
+	public static final String FULL_SCREEN_KEY = "pref_key_full_screen_settings";
+	public static final String NOTIFICATION_KEY = "pref_key_notification_on";
+	
 	private static final String THEME_INT_KEY = "THEME";
 	private static SharedPreferences mPreferences;
 	private static PreferencesManager mInstance;
@@ -48,6 +52,14 @@ public class PreferencesManager {
 
 	public Integer getThemePref() {
 		return mPreferences.getInt(THEME_INT_KEY, THEME_LIGHT);
+	}
+	
+	public SharedPreferences getSharedPref() {
+		return mPreferences;
+	}
+	
+	public Editor getPrefEditor() {
+		return mEditor;
 	}
 
 	/**

@@ -1,9 +1,5 @@
 package com.yogidev.android.livingroom;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -13,6 +9,7 @@ import android.widget.Toast;
 
 import com.yogidev.android.livingroom.SwipeListView.SwipeListViewCallback;
 import com.yogidev.android.livingroom.data.bean.Reference;
+import com.yogidev.android.livingroom.data.mock.MockReferenceList;
 
 public class ReferenceListActivity extends ListActivity implements SwipeListViewCallback {
 	
@@ -50,35 +47,13 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	    // Set background
 	    this.findViewById(R.id.containerReferenceList).setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
 	    
-		// set transparency 
-//		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
-	    
-	    // List View (accessible by getListView() since extends ListActivity)
-	    // or : mListView = (ListView) findViewById(android.R.id.list);
-//	    mListView = getListView();
-	    
 	    // SimpleListView to manage the swipe on items
 	    SwipeListView l = new SwipeListView(this, this);
 		l.exec();
 		
-		List<Reference> referenceList =   new ArrayList<Reference>(Arrays.asList(
-				new Reference(1, "T3 - 60 m² NEUF BBC, avec 1 parking", "T3", "Toulouse", "Les Chalets", "Vente", 194250, 60, "http://www.agence-livingroom.com/references/1042/photo_reference.jpg", "10 rue Jacqueline Auriol. Résidence neuve (2012) étudiante avec laverie, salle informatique, employé d'immeuble. Sortie rocade n°20, proche ligne métro RANGUEIL, Gare SNCF de Saint Agne, faculté de pharmacie, CREPS, IUT, ENAC, CNES. T1 de 22.30 m² avec une pièce à vivre spacieuse et sa kitchenette équipée (réfrigérateur, hotte, plaques électriques et rangements), salle d'eau avec WC. Double vitrage."),
-			    new Reference(1, "T2 - 51m² avec parking", "T3", "Toulouse", "Argoulets", "Location", 800, 51, "http://www.agence-livingroom.com/references/1057/photo_reference.jpg", "127 route de Launaguet, au calme dans une résidence récente et fermée. T2 de 46,50m² au rez de chaussée d'un immeuble de deux étages avec un balcon et une place de parking. Appartement en parfait état composé d'une entrée, un séjour avec accès au balcon et à la cuisine, (La cuisine est équipée et possède un cellier), une chambre avec un placard, une salle de bains et des wc séparés. Carrelage au sol dans les pièces principales."),
-			    new Reference(1, "T4 - 90 m²", "T4", "Toulouse", "Matabiau", "Vente", 253150, 90, "http://www.agence-livingroom.com/references/1100/photo_reference.jpg", "60 CHEMIN RAYNAL, proche du lac de la Maourine, idéal pour un peu de footing ou des promenades, intermarché à proximité, et transports (métro + bus(36 - 19 - 38)) accessibles rapidement. Appartement T2 de 41m² avec balcon de 7m² dans résidence fermée, au calme. Chauffage individuel au gaz. 1 parking."),
-			    new Reference(1, "T1 - 20 m² ", "T1", "Toulouse", "Hypercentre", "Location", 350, 20, "http://www.agence-livingroom.com/references/1110/photo_reference.jpg", "Dans petite résidence, au calme, récente et fermée. T2 de 43m² avec terrasse de 20m² au 3éme et dernier étage. Séjour, cuisine séparée, chambre avec placard, salle de bains, parking. Chauffage individuel électrique.")
-				));
-		
-		ArrayList<String> eqtList1 = new ArrayList<String>(Arrays.asList("Parking","Gardien"));
-		referenceList.get(0).setListeEquipements(eqtList1);
-		ArrayList<String> eqtList2 = new ArrayList<String>(Arrays.asList("Double vitrage","Parking"));
-		referenceList.get(1).setListeEquipements(eqtList2);
-		ArrayList<String> eqtList3 = new ArrayList<String>(Arrays.asList("Double vitrage","Gardien"));
-		referenceList.get(2).setListeEquipements(eqtList3);
-		ArrayList<String> eqtList4 = new ArrayList<String>(Arrays.asList("Parking"));
-		referenceList.get(3).setListeEquipements(eqtList4);
-		
-        mAdapter = new ReferenceListAdapter(this, referenceList);
-//	    mListView.setAdapter(mAdapter);
+		// TODO : replace with database request result !!
+        mAdapter = new ReferenceListAdapter(this, MockReferenceList.REFERENCE_LIST);
+        
 	    setListAdapter(mAdapter);
 	    
         // get content of the "recherche" object

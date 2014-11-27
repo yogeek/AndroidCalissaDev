@@ -111,7 +111,8 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:background="@android:color/transparent"
-	                android:src="@drawable/zones" />
+	                android:src="@drawable/zones"
+	                android:onClick="onCarteClicked" />
 
 	            <Button
 	                android:id="@+id/button3"
@@ -119,7 +120,8 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="10dp"
-	                android:text="@string/surLaCarte" />
+	                android:text="@string/surLaCarte"
+	                android:onClick="onCarteClicked" />
 	        
 	        </LinearLayout>
             

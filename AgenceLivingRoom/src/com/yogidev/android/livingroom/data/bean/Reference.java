@@ -7,6 +7,8 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.yogidev.android.livingroom.R;
 import com.yogidev.android.livingroom.data.util.Coordinate;
 
 /**
@@ -137,6 +139,91 @@ public class Reference implements Parcelable {
 		this.photos.remove(photo);
 	}
 	
+	public LatLng getLatLng() {
+		return new LatLng(this.getLatLon().getLatitude(),this.getLatLon().getLongitude());
+	}
+	
+	public int getMapMarkerDrawable() {
+		String markerType = this.getTypeRef() + "-" + this.getLocVente();
+		int marker = R.drawable.favicon;
+		if (markerType.equals("T1-Location"))
+			marker = R.drawable.marqueur_location_t1;
+		if (markerType.equals("T2-Location"))
+			marker = R.drawable.marqueur_location_t2;
+		if (markerType.equals("T3-Location"))
+			marker = R.drawable.marqueur_location_t3;
+		if (markerType.equals("T4-Location"))
+			marker = R.drawable.marqueur_location_t4;
+		if (markerType.equals("T5-Location"))
+			marker = R.drawable.marqueur_location_t5;
+		if (markerType.equals("T1-Vente"))
+			marker = R.drawable.marqueur_vente_t1;
+		if (markerType.equals("T2-Vente"))
+			marker = R.drawable.marqueur_vente_t2;
+		if (markerType.equals("T3-Vente"))
+			marker = R.drawable.marqueur_vente_t3;
+		if (markerType.equals("T4-Vente"))
+			marker = R.drawable.marqueur_vente_t4;
+		if (markerType.equals("T5-Vente"))
+			marker = R.drawable.marqueur_vente_t5;
+		
+		return marker;
+		
+	}
+	
+	public int getDPEDrawable() {
+		String dpeType = this.getDpe();
+		int dpeImg = R.drawable.favicon;
+		if (dpeType.equals("A")) {
+			dpeImg = R.drawable.dpe_a;
+		}
+		if (dpeType.equals("B")) {
+			dpeImg = R.drawable.dpe_b;
+		}
+		if (dpeType.equals("C")) {
+			dpeImg = R.drawable.dpe_c;
+		}
+		if (dpeType.equals("D")) {
+			dpeImg = R.drawable.dpe_d;
+		}
+		if (dpeType.equals("E")) {
+			dpeImg = R.drawable.dpe_e;
+		}
+		if (dpeType.equals("F")) {
+			dpeImg = R.drawable.dpe_f;
+		}
+		if (dpeType.equals("G")) {
+			dpeImg = R.drawable.dpe_g;
+		}
+		return dpeImg;
+	}
+	
+	public int getGESDrawable() {
+		String gesType = this.getGes();
+		int gesImg = R.drawable.favicon;
+		if (gesType.equals("A")) {
+			gesImg = R.drawable.ges_a;
+		}
+		if (gesType.equals("B")) {
+			gesImg = R.drawable.ges_b;
+		}
+		if (gesType.equals("C")) {
+			gesImg = R.drawable.ges_c;
+		}
+		if (gesType.equals("D")) {
+			gesImg = R.drawable.ges_d;
+		}
+		if (gesType.equals("E")) {
+			gesImg = R.drawable.ges_e;
+		}
+		if (gesType.equals("F")) {
+			gesImg = R.drawable.ges_f;
+		}
+		if (gesType.equals("G")) {
+			gesImg = R.drawable.ges_g;
+		}
+		return gesImg;
+	}
 
 	public Reference(long id, String titreRef, String typeRef,
 			String titreAdmin, String infoInterne, String locVente,
@@ -175,97 +262,6 @@ public class Reference implements Parcelable {
 		this.visible = visible;
 		this.libreDate = libreDate;
 	}
-	
-	
-	
-	//------------------------------------ parcel part BEGIN ------------------------------------
-//	public Reference(Parcel in){
-//
-//		//		String[] data= new String[28];
-//		//		in.readStringArray(data);
-//
-//		this.id= in.readLong();
-//		this.titreRef= in.readString();
-//		this.titreAdmin = in.readString();
-//		this.infoInterne = in.readString();
-//		this.locVente = in.readString();
-//		this.appartementMaison = in.readString();
-//		this.ville = in.readString();
-//		this.quartier = in.readString();
-//		this.loyerOuPrix = in.readInt();
-//		this.chargesOuCopro = in.readInt();
-//		this.depotOuTaxe = in.readInt();
-//		this.fraisAgence = in.readDouble();
-//		//		this.latLon = data[12];
-//		this.descriptif = in.readString();
-//		this.surface = in.readDouble();
-//		this.nbLotCopro = in.readInt();
-//		this.dpe = in.readString();
-//		this.ges = in.readString();
-//		this.listeEquipements = (ArrayList<String>) in.readSerializable();
-//		this.vignette = in.readString();
-//		this.videoYoutube = in.readString();
-//		//		this.disponible = in.readBooleanArray();
-//		//		this.nouveaute = Boolean.parseBoolean(data[22]);
-//		//		this.visible = Boolean.parseBoolean(data[23]);
-//		//		this.libreDate = in.read
-//	}
-//
-//	@Override
-//	public int describeContents() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public void writeToParcel(Parcel dest, int flags) {
-//		// TODO Auto-generated method stub
-//
-//		dest.writeLong(this.id);
-//		dest.writeString(this.titreRef);
-//		dest.writeString(this.titreAdmin);
-//		dest.writeString(this.infoInterne);
-//		dest.writeString(this.locVente);
-//		dest.writeString(this.appartementMaison);
-//		dest.writeString(this.ville);
-//		dest.writeString(this.quartier);
-//		dest.writeInt(this.loyerOuPrix);
-//		dest.writeInt(this.chargesOuCopro);
-//		dest.writeDouble(this.fraisAgence);
-//		//	this.latLon = data[12];
-//		dest.writeString(this.descriptif);
-//		dest.writeDouble(this.surface);
-//		dest.writeInt(this.nbLotCopro);
-//		dest.writeString(this.dpe);
-//		dest.writeString(this.ges);
-//		dest.writeSerializable((Serializable) this.listeEquipements);
-//		dest.writeString(this.vignette);
-//		//	this.videoYoutube = data[20];
-//		//	this.disponible = in.readBooleanArray();
-//		//	this.nouveaute = Boolean.parseBoolean(data[22]);
-//		//	this.visible = Boolean.parseBoolean(data[23]);
-//		//	this.libreDate = in.read
-//
-//
-//	}
-//
-//	public static final Parcelable.Creator<Reference> CREATOR= new Parcelable.Creator<Reference>() {
-//
-//		@Override
-//		public Reference createFromParcel(Parcel source) {
-//			// TODO Auto-generated method stub
-//			return new Reference(source);  //using parcelable constructor
-//		}
-//
-//		@Override
-//		public Reference[] newArray(int size) {
-//			// TODO Auto-generated method stub
-//			return new Reference[size];
-//		}
-//	};
-	
-	//------------------------------------ parcel part END ------------------------------------
-	
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////

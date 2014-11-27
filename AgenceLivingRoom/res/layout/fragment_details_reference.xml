@@ -1,13 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
+    android:padding="10dp"
     >
 
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:layout_margin="10dp"
     android:gravity="end"
     android:orientation="vertical" >
 
@@ -16,11 +16,10 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="20dp"
+	    android:paddingBottom="5dp"
 	    android:layout_gravity="start"
 	    android:background="@drawable/prix_box_border"
 	    android:text="Détails de la reference"
-	    android:drawableLeft="@drawable/icone_fleche_blanche" 
-	    android:drawableStart="@drawable/icone_fleche_blanche" 
 	    />
 	
 	<TextView  
@@ -28,11 +27,10 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="20dp"
+	    android:paddingBottom="5dp"
 	    android:layout_gravity="start"
 	    android:background="@drawable/prix_box_border"
 	    android:text="Equipements de la reference"
-	    android:drawableLeft="@drawable/icone_fleche_blanche" 
-	    android:drawableStart="@drawable/icone_fleche_blanche" 
 	    />
 	
 	<LinearLayout

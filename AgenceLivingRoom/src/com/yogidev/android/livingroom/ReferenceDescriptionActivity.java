@@ -20,11 +20,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -253,12 +255,11 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			
 			// Fill the main image 
 			ImageButton collectionButton = (ImageButton) rootView.findViewById(R.id.demo_collection_button);
-//			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(ref.FirstPhoto());
-			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(CollectionGalleryActivity.photosList.get(0));
+			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(ref.getPhotos().get(0));
 			
 			// Fill the prix title
 			TextView prixTitleView = (TextView) rootView.findViewById(R.id.txtPrixTitre);
-			prixTitleView.setText((ref.isLocation()?"Loyer CC:":"Prix FAi"));
+			prixTitleView.setText((ref.isLocation()?"Loyer CC:":"Prix FAI"));
 
 			// Fill the Title
 			TextView prixView = (TextView) rootView.findViewById(R.id.txtPrix);
@@ -290,7 +291,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 	            	 try {
 	            		 uriText = "mailto:"+getString(R.string.infoMail) + 
 	            				 "?subject=" + URLEncoder.encode("Demande de visite du bien " + ((Reference)getArguments().getParcelable(ARG_CURRENT_REF)).getId(), "UTF-8").replace("+", "%20") + 
-	            				 "&body=" + URLEncoder.encode("Bonjour, Je souhaiterai visiter le bien suivant : " + ((Reference)getArguments().getParcelable(ARG_CURRENT_REF)).getTitreRef() + ".", "UTF-8").replace("+", "%20");
+	            				 "&body=" + URLEncoder.encode("Bonjour, Je souhaiterais visiter le bien suivant : " + ((Reference)getArguments().getParcelable(ARG_CURRENT_REF)).getTitreRef() + ".", "UTF-8").replace("+", "%20");
 	            	 } catch (UnsupportedEncodingException e) {
 	            		 Toast.makeText(getActivity(), 
 	            				 "Problème d'encodage du mail.", Toast.LENGTH_SHORT).show();
@@ -379,6 +380,14 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 				}
 			}
 			
+			// Fill the DPE
+			ImageView dpeView = (ImageView) rootView.findViewById(R.id.imgDpe);
+			dpeView.setImageDrawable(getResources().getDrawable(ref.getDPEDrawable()));
+			
+			// Fill the GES
+			ImageView gesView = (ImageView) rootView.findViewById(R.id.imgGes);
+			gesView.setImageDrawable(getResources().getDrawable(ref.getGESDrawable()));
+			
 			
 			return rootView;
 		}
@@ -391,9 +400,6 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 
 		public static final String ARG_CARTE_NUMBER = "carte_number";
 		public static final String ARG_CURRENT_REF= "mCurrentRef";
-		
-		static final LatLng HAMBURG = new LatLng(53.558, 9.927);
-		static final LatLng KIEL = new LatLng(53.551, 9.993);
 		
 		static final LatLng AGENCE = new LatLng(43.613888, 1.442122);
 		
@@ -417,51 +423,48 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 		    } catch (InflateException e) {
 		        /* map is already there, just return view as it is */
 		    }
-			
-			
-			Bundle args = getArguments();
-			
-			map = ((SupportMapFragment) ReferenceDescriptionActivity.fragmentManager.findFragmentById(R.id.map)).getMap();
+		    
+		    
+		    // get the map
+		    map = ((SupportMapFragment) ReferenceDescriptionActivity.fragmentManager.findFragmentById(R.id.map)).getMap();
 			
 			// show my location
 			map.setMyLocationEnabled(true);
+			// show the "locate me" button
 			map.getUiSettings().setMyLocationButtonEnabled(true);
 			
-//		    Marker hamburg = map.addMarker(new MarkerOptions().position(HAMBURG).title("Hamburg"));
-//		    Marker kiel = map.addMarker(new MarkerOptions()
-//		        .position(KIEL)
-//		        .title("Kiel")
-//		        .snippet("Kiel is cool")
-//		        .icon(BitmapDescriptorFactory
-//		            .fromResource(R.drawable.ic_launcher)));
+			// Retrieve the reference
+			Bundle args = getArguments();
+			Reference ref = args.getParcelable(ARG_CURRENT_REF);
+			
+			// Reference position
+			LatLng refPosition = new LatLng(ref.getLatLon().getLatitude(),ref.getLatLon().getLongitude());
+			
+			// Reference marker
+		    Marker refMarker = map.addMarker(new MarkerOptions()
+		        .position(refPosition)
+		        .title(ref.getTitreRef())
+		        .snippet(ref.getVille() + ((ref.getQuartier() == null && ref.getQuartier().isEmpty())?"":" - " + ref.getQuartier()))
+		        .icon(BitmapDescriptorFactory
+		            .fromResource(ref.getMapMarkerDrawable())));
 		    
-		    Marker agence = map.addMarker(new MarkerOptions()
-	        .position(AGENCE)
-	        .title("LivingRoom")
-	        .snippet("Caroline travaille ici !")
-	        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher)));
+		    refMarker.showInfoWindow();
 		    
-		    agence.showInfoWindow();
+		    map.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+				
+				@Override
+				public void onInfoWindowClick(Marker marker) {
+					Toast.makeText(view.getContext(), "Reference = " + marker.getTitle() + "\n[" +  marker.getPosition() + "]", Toast.LENGTH_SHORT).show();
+				}
+			});
 		    
-//		  //Move the camera instantly to hamburg with a zoom of 15.
-//		    map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
-//
-//		    // Zoom in, animating the camera.
-//		    map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null); 
-
-		    // Move the camera instantly to AGENCE with a zoom of 15.
-		    map.moveCamera(CameraUpdateFactory.newLatLngZoom(AGENCE, 5));
+		    
+		    // Move the camera instantly to refPosition with a zoom of 15.
+		    map.moveCamera(CameraUpdateFactory.newLatLngZoom(refPosition, 5));
 		    // Zoom in, animating the camera.
-		    map.animateCamera(CameraUpdateFactory.zoomTo(17), 5000, null);
+		    map.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
 		 
 		    
-//		    CameraPosition cameraPosition = new CameraPosition.Builder()
-//		    .target(AGENCE)
-//		    .zoom(12.8f)
-//		    .build();
-//		    
-//		    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
 			return view;
 		}
 	}
