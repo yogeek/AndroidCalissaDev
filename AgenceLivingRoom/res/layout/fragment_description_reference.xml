@@ -14,15 +14,14 @@
         android:textStyle="bold"
         />
     
-    <ImageButton 
+    <ImageButton
         android:id="@+id/demo_collection_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:contentDescription="TODO"
-        android:gravity="center"
-        android:text="Voir les photos"
         android:src="@drawable/logo"
-        />
+        android:text="Voir les photos" />
     
     <LinearLayout 
         android:layout_width="match_parent"
@@ -74,7 +73,7 @@
 		    android:layout_marginLeft="20dp"
 		    android:layout_marginStart="20dp"
 		    android:layout_gravity="end"
-		    android:textSize="18sp"
+		    android:textSize="15sp"
 		    android:textAlignment="gravity"
 		    android:ellipsize="none"
 		    />

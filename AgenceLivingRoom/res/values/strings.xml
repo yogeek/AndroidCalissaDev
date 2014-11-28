@@ -24,6 +24,18 @@
     
     <string name="no_result">Aucun résultat !</string>
     
+    <plurals name="numberOfResults">
+        <!--
+             As a developer, you should always supply "one" and "other"
+             strings. Your translators will know which strings are actually
+             needed for their language. Always include %d in "one" because
+             translators will need to use %d for languages where "one"
+             doesn't mean 1 (as explained above).
+          -->
+        <item quantity="one">Résultat (%d)</item>
+        <item quantity="other">Résultats (%d)</item>
+    </plurals>
+    
     <string name="boutonValider">Valider</string>
     <string name="boutonRechercher">Rechercher</string>
 	<string name="boutonModifier">Modifier</string>
@@ -69,5 +81,20 @@
 	<string name="dummy_section_text">Section %1d is just a dummy section.</string>
 	
 	<string name="collectionGallery">Galerie de photos</string>
+	
+	<!-- Details in ReferenceDescriptionActivity -->
+	<string name="fraisAgenceLocation">- Frais d\'agence: %1$.0f€</string>
+	<string name="fraisAgenceVente">- Frais d\'agence: %1$.2f%%</string>
+	<string name="fraisAgenceNonRenseigne">- Frais d\'agence: Non renseignés</string>
+	<string name="loyerHorsCharges">- Loyer hors-charges: %1$d€</string>
+	<string name="charges">- Charges: %1$d€</string>
+	<string name="chargesCopro">- Charges copropriété: %1$d€/an</string>
+	<string name="depotGarantie">- Dépôt de garantie: %1$d€</string>
+	<string name="taxeFonciere">- Taxe foncière: %1$d€</string>
+	
+	<string name="mailSubject">Demande de visite de la référence %1$d</string>
+	<string name="mailBody">Bonjour,\n\n\
+	    Je souhaiterais visiter le bien suivant : %1$s.\n\
+	    Pouvez-vous me contacter pour fixer un rendez-vous s\'il-vous-plaît ?</string>
 	
 </resources>

@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -249,6 +250,8 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			Bundle args = getArguments();
 			Reference ref = args.getParcelable(ARG_CURRENT_REF);
 			
+			final Resources res = getResources();
+			
 			// Fill the Title
 			TextView titreView = (TextView) rootView.findViewById(R.id.textTitreRef);
 			titreView.setText(ref.getVille() + " - " + ref.getQuartier() + " - " + ref.getSurfaceInteger() + "m²");
@@ -259,7 +262,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			
 			// Fill the prix title
 			TextView prixTitleView = (TextView) rootView.findViewById(R.id.txtPrixTitre);
-			prixTitleView.setText((ref.isLocation()?"Loyer CC:":"Prix FAI"));
+			prixTitleView.setText((ref.isLocation()?"Loyer CC":"Prix FAI"));
 
 			// Fill the Title
 			TextView prixView = (TextView) rootView.findViewById(R.id.txtPrix);
@@ -287,11 +290,12 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 //	                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
 //	                 }
 	                 
+	            	 Reference mRef = (Reference)getArguments().getParcelable(ARG_CURRENT_REF);
 	            	 String uriText = "";
 	            	 try {
 	            		 uriText = "mailto:"+getString(R.string.infoMail) + 
-	            				 "?subject=" + URLEncoder.encode("Demande de visite du bien " + ((Reference)getArguments().getParcelable(ARG_CURRENT_REF)).getId(), "UTF-8").replace("+", "%20") + 
-	            				 "&body=" + URLEncoder.encode("Bonjour, Je souhaiterais visiter le bien suivant : " + ((Reference)getArguments().getParcelable(ARG_CURRENT_REF)).getTitreRef() + ".", "UTF-8").replace("+", "%20");
+	            				 "?subject=" + URLEncoder.encode(String.format(res.getString(R.string.mailSubject, mRef.getId())), "UTF-8").replace("+", "%20") + 
+	    	            		 "&body=" + URLEncoder.encode(String.format(res.getString(R.string.mailBody, mRef.getTitreRef())), "UTF-8").replace("+", "%20");
 	            	 } catch (UnsupportedEncodingException e) {
 	            		 Toast.makeText(getActivity(), 
 	            				 "Problème d'encodage du mail.", Toast.LENGTH_SHORT).show();
@@ -312,13 +316,23 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			// Fill the Description
 			TextView descView = (TextView) rootView.findViewById(R.id.textDescRef);
 			String details = "";
-			String charges = "- Charges ";
 			if (ref.isLocation()) {
-				details += "- Loyer hors charges: " + ref.getLoyerOuPrix() + "€\n";
-				charges += "copropriété: ";  
+				details += String.format(res.getString(R.string.loyerHorsCharges), ref.getLoyerHorsCharges()) + "\n";
+				details += String.format(res.getString(R.string.charges), ref.getChargesOuCopro()) + "\n";
+				if (ref.getFraisAgence()==0)
+					details += String.format(res.getString(R.string.fraisAgenceNonRenseigne)) + "\n";
+				else
+					details += String.format(res.getString(R.string.fraisAgenceLocation), ref.getFraisAgence()) + "\n";
+				details += String.format(res.getString(R.string.depotGarantie), ref.getDepotOuTaxe());
 			}
-			details += charges + ref.getChargesOuCopro() + "€" + (ref.isLocation()?"":"/an"); 
-			
+			else {
+				details += String.format(res.getString(R.string.chargesCopro), ref.getChargesOuCopro()) + "\n";
+				details += String.format(res.getString(R.string.taxeFonciere), ref.getDepotOuTaxe()) + "\n";
+				if (ref.getFraisAgence()==0)
+					details += String.format(res.getString(R.string.fraisAgenceNonRenseigne)) + "\n";
+				else
+					details += String.format(res.getString(R.string.fraisAgenceVente), ref.getFraisAgence()) + "\n";
+			}
 					
 			descView.setText(details);
 

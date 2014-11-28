@@ -30,7 +30,7 @@
 	    android:paddingBottom="5dp"
 	    android:layout_gravity="start"
 	    android:background="@drawable/prix_box_border"
-	    android:text="Equipements de la reference"
+	    android:text="Equipements"
 	    />
 	
 	<LinearLayout

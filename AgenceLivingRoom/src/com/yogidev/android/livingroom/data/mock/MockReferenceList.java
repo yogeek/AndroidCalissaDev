@@ -99,6 +99,9 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(0).setLatLon(new Coordinate(43.5748164f, 1.4767395999999735f));
 		REFERENCE_LIST.get(0).setDpe("F");
 		REFERENCE_LIST.get(0).setGes("D");
+		REFERENCE_LIST.get(0).setFraisAgence(2);
+		REFERENCE_LIST.get(0).setDepotOuTaxe(1129);
+		REFERENCE_LIST.get(0).setChargesOuCopro(550);
 		REFERENCE_LIST.get(0).addPhoto("http://agence-livingroom.com/references/1142/photo_1709.jpg");
 		REFERENCE_LIST.get(0).addPhoto("http://agence-livingroom.com/references/1142/photo_1710.jpg");
 		REFERENCE_LIST.get(0).addPhoto("http://agence-livingroom.com/references/1142/photo_1708.jpg");
@@ -112,9 +115,12 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(1).setLatLon(new Coordinate(43.4989035f, 1.3074595f));
 		REFERENCE_LIST.get(1).setDpe("A");
 		REFERENCE_LIST.get(1).setGes("G");
-		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1709.jpg");
-		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1710.jpg");
+		REFERENCE_LIST.get(1).setFraisAgence(460);
+		REFERENCE_LIST.get(1).setDepotOuTaxe(460);
+		REFERENCE_LIST.get(1).setChargesOuCopro(50);
 		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1708.jpg");
+		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1710.jpg");
+		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1709.jpg");
 		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1711.jpg");
 		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1713.jpg");
 		REFERENCE_LIST.get(1).addPhoto("http://agence-livingroom.com/references/1142/photo_1714.jpg");
@@ -125,6 +131,9 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(2).setLatLon(new Coordinate(43.594593f, 1.443270f));
 		REFERENCE_LIST.get(2).setDpe("A");
 		REFERENCE_LIST.get(2).setGes("B");
+		REFERENCE_LIST.get(2).setFraisAgence(2);
+		REFERENCE_LIST.get(2).setDepotOuTaxe(1129);
+		REFERENCE_LIST.get(2).setChargesOuCopro(550);
 		REFERENCE_LIST.get(2).addPhoto("http://agence-livingroom.com/references/1142/photo_1709.jpg");
 		REFERENCE_LIST.get(2).addPhoto("http://agence-livingroom.com/references/1142/photo_1710.jpg");
 		REFERENCE_LIST.get(2).addPhoto("http://agence-livingroom.com/references/1142/photo_1708.jpg");
@@ -138,6 +147,9 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(3).setLatLon(new Coordinate(43.5875071f, 1.457837100000006f));
 		REFERENCE_LIST.get(3).setDpe("C");
 		REFERENCE_LIST.get(3).setGes("C");
+		REFERENCE_LIST.get(3).setFraisAgence(2);
+		REFERENCE_LIST.get(3).setDepotOuTaxe(1017);
+		REFERENCE_LIST.get(3).setChargesOuCopro(550);
 		REFERENCE_LIST.get(3).addPhoto("http://agence-livingroom.com/references/1129/photo_1526.jpg");
 		REFERENCE_LIST.get(3).addPhoto("http://agence-livingroom.com/references/1129/photo_1530.jpg");
 		REFERENCE_LIST.get(3).addPhoto("http://agence-livingroom.com/references/1129/photo_1531.jpg");
@@ -149,6 +161,9 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(4).setLatLon(new Coordinate(43.605308f, 1.4264141999999537f));
 		REFERENCE_LIST.get(4).setDpe("A");
 		REFERENCE_LIST.get(4).setGes("A");
+		REFERENCE_LIST.get(4).setFraisAgence(460);
+		REFERENCE_LIST.get(4).setDepotOuTaxe(460);
+		REFERENCE_LIST.get(4).setChargesOuCopro(50);
 		REFERENCE_LIST.get(4).addPhoto("http://agence-livingroom.com/references/1142/photo_1709.jpg");
 		REFERENCE_LIST.get(4).addPhoto("http://agence-livingroom.com/references/1142/photo_1710.jpg");
 		REFERENCE_LIST.get(4).addPhoto("http://agence-livingroom.com/references/1142/photo_1708.jpg");
@@ -162,6 +177,9 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(5).setLatLon(new Coordinate(43.561351f, 1.409631f));
 		REFERENCE_LIST.get(5).setDpe("A");
 		REFERENCE_LIST.get(5).setGes("A");
+		REFERENCE_LIST.get(5).setFraisAgence(2);
+		REFERENCE_LIST.get(5).setDepotOuTaxe(1017);
+		REFERENCE_LIST.get(5).setChargesOuCopro(550);
 		REFERENCE_LIST.get(5).addPhoto("http://agence-livingroom.com/references/1022/photo_205.jpg");
 		REFERENCE_LIST.get(5).addPhoto("http://agence-livingroom.com/references/1022/photo_207.jpg");
 		REFERENCE_LIST.get(5).addPhoto("http://agence-livingroom.com/references/1022/photo_208.jpg");
@@ -174,6 +192,9 @@ public final class MockReferenceList {
 		REFERENCE_LIST.get(6).setLatLon(new Coordinate(43.6557568f, 1.469586f));
 		REFERENCE_LIST.get(6).setDpe("A");
 		REFERENCE_LIST.get(6).setGes("A");
+		REFERENCE_LIST.get(6).setFraisAgence(460);
+		REFERENCE_LIST.get(6).setDepotOuTaxe(460);
+		REFERENCE_LIST.get(6).setChargesOuCopro(50);
 		REFERENCE_LIST.get(6).addPhoto("http://agence-livingroom.com/references/1022/photo_205.jpg");
 		REFERENCE_LIST.get(6).addPhoto("http://agence-livingroom.com/references/1022/photo_207.jpg");
 		REFERENCE_LIST.get(6).addPhoto("http://agence-livingroom.com/references/1022/photo_208.jpg");

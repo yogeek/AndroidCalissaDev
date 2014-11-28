@@ -86,7 +86,7 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    
 	    // Set title
-	    actionBar.setTitle("Résultats (" + mAdapter.getCount() + ")");
+	    actionBar.setTitle(getResources().getQuantityString(R.plurals.numberOfResults, mAdapter.getCount(), mAdapter.getCount()));
 	    // Set logo
 	    //actionBar.setLogo(R.drawable.partage);
 	    actionBar.setDisplayUseLogoEnabled(true);

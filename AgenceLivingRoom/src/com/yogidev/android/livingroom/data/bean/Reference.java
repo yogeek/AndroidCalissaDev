@@ -143,6 +143,10 @@ public class Reference implements Parcelable {
 		return new LatLng(this.getLatLon().getLatitude(),this.getLatLon().getLongitude());
 	}
 	
+	public int getLoyerHorsCharges() {
+		return this.getLoyerOuPrix() - this.getChargesOuCopro();
+	}
+	
 	public int getMapMarkerDrawable() {
 		String markerType = this.getTypeRef() + "-" + this.getLocVente();
 		int marker = R.drawable.favicon;
