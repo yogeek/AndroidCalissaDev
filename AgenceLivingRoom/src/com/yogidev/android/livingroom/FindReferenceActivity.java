@@ -1,8 +1,11 @@
 package com.yogidev.android.livingroom;
 
+import java.util.Arrays;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,8 +15,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.yogidev.android.livingroom.data.bean.Recherche;
+import com.yogidev.android.livingroom.data.util.Constants;
 
 public class FindReferenceActivity extends Activity {
 	
@@ -23,7 +30,9 @@ public class FindReferenceActivity extends Activity {
 	private Spinner spinnerQuartier;
 	private Spinner spinnerType;
 	private Spinner spinnerLoyer;
+	private RadioGroup radioLouerVendre;
 	private RadioButton radioButtonLouer;
+	private RadioButton radioButtonVendre;
 	private ImageButton buttonRechercher;
 	private TextView textQuartier;
 	
@@ -63,13 +72,56 @@ public class FindReferenceActivity extends Activity {
 	    spinnerType = (Spinner) findViewById(R.id.SpinnerType);
 	    
 	    // Radio location/vente
+	    radioLouerVendre = (RadioGroup) findViewById(R.id.radioLouerVendre);
 	    radioButtonLouer = (RadioButton) findViewById(R.id.radioLouer);
+	    radioButtonVendre = (RadioButton) findViewById(R.id.radioVendre);
 	    
 	    // Spinner Loyer
 	    spinnerLoyer = (Spinner) findViewById(R.id.SpinnerLoyer);
 	    
 	    // Button Rechercher
 	    buttonRechercher = (ImageButton) findViewById(R.id.ButtonRechercher);
+	    
+	    // TODO : retrieve recherche details into shared preferences
+	    SharedPreferences sharedPrefs = PreferencesManager.getInstance().getSharedPref();
+	    int position = 0;
+	    if (sharedPrefs.contains(Constants.RECHERCHE_VILLE))
+	    {
+	    	position = Arrays.asList(getResources().getStringArray(R.array.villes_array)).indexOf(sharedPrefs.getString(Constants.RECHERCHE_VILLE,""));
+	    	spinnerVille.setSelection(position);
+
+	    }
+	    if (sharedPrefs.contains(Constants.RECHERCHE_QUARTIER))
+	    {
+	    	position = Arrays.asList(getResources().getStringArray(R.array.quartiers_array)).indexOf(sharedPrefs.getString(Constants.RECHERCHE_QUARTIER,""));
+	    	spinnerQuartier.setSelection(position);
+
+	    }
+	    if (sharedPrefs.contains(Constants.RECHERCHE_TYPE))
+	    {
+	    	position = Arrays.asList(getResources().getStringArray(R.array.types_array)).indexOf(sharedPrefs.getString(Constants.RECHERCHE_TYPE,""));
+	    	spinnerType.setSelection(position);
+
+	    }
+	    if (sharedPrefs.contains(Constants.RECHERCHE_IS_LOCATION))
+	    {
+	    	if (sharedPrefs.getBoolean(Constants.RECHERCHE_IS_LOCATION,true)) {
+	    		radioButtonLouer.setChecked(true);
+	    		radioButtonVendre.setChecked(false);
+	    		spinnerLoyer.setVisibility(View.VISIBLE);
+	    	}
+	    	else {
+	    		radioButtonLouer.setChecked(false);
+	    		radioButtonVendre.setChecked(true);
+	    		spinnerLoyer.setVisibility(View.GONE);
+	    	}
+	    }
+	    if (sharedPrefs.contains(Constants.RECHERCHE_PRIX))
+	    {
+	    	position = Arrays.asList(getResources().getStringArray(R.array.loyers_array)).indexOf(sharedPrefs.getString(Constants.RECHERCHE_PRIX,""));
+	    	spinnerLoyer.setSelection(position);
+	    }
+
 	    
 	    // hide the SpinnerQuartier if ville != "Toulouse"
 	    spinnerVille.setOnItemSelectedListener( 
@@ -93,10 +145,27 @@ public class FindReferenceActivity extends Activity {
 	    			}
 
 	    		});
-//	    ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.villes_array, R.layout.spinner_item);
-//	    adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-//	    spinnerVille.setAdapter(adapter);
-	    
+
+	    // Manage the radio buttons
+	    radioLouerVendre.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() 
+	    {
+	    	public void onCheckedChanged(RadioGroup group, int checkedId) 
+	    	{
+	    		// Check which radio button was clicked
+	    		switch(checkedId) {
+	    		case R.id.radioLouer:
+	    			findViewById(R.id.SpinnerLoyer).setVisibility(View.VISIBLE);
+	    			spinnerLoyer.setVisibility(View.VISIBLE);
+	    			break;
+	    		case R.id.radioVendre:
+	    			// hide the spinnerLoyer if Radio button "Vente" is checked
+	    			findViewById(R.id.SpinnerLoyer).setVisibility(View.GONE);
+	    			spinnerLoyer.setVisibility(View.GONE);
+	    			break;
+	    		}
+	    	}
+	    });
+
 
 	    buttonRechercher.setOnClickListener(
 	    		new OnClickListener() {
@@ -109,13 +178,13 @@ public class FindReferenceActivity extends Activity {
 	    					String type = (String)spinnerType.getSelectedItem();
 	    					boolean isLocation = radioButtonLouer.isChecked();
 	    					String loyer = (String)spinnerLoyer.getSelectedItem();
-	    						    					
-	    					
+
+
 	    					// TODO : Enregistrer la recherche
 	    					// Recherche recherche = new Recherche(ville, quartier, type, isLocation, loyer);
 	    					// SerialTool.saveRecherche(recherche, getApplicationContext());
-	    					objetbunble.putStringArray("recherche", new String[]{ville,quartier,type,Boolean.toString(isLocation),loyer});
-	    					
+	    					objetbunble.putSerializable(Constants.CURRENT_RECHERCHE, new Recherche(ville, quartier, type, isLocation, loyer));
+
 	    					// Launch RechercheListActivity
 	    					Intent intent = new Intent(FindReferenceActivity.this, ReferenceListActivity.class);
 	    					intent.putExtras(objetbunble);

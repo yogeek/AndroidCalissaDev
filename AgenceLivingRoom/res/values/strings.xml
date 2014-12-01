@@ -7,6 +7,7 @@
     <string name="day_night">Day/Night</string>
     <string name="action_about">A propos</string>
     <string name="action_infos">Infos</string>
+    <string name="action_saveRecherche">Enregistrer la recherche</string>
     
     <string name="logo_desc">Logo de l\'application</string>
     <string name="description">Application mobile de l\'agence immobilière Living Room</string>
@@ -81,6 +82,7 @@
 	<string name="dummy_section_text">Section %1d is just a dummy section.</string>
 	
 	<string name="collectionGallery">Galerie de photos</string>
+	<string name="zoomGallery">Galerie de photos</string>
 	
 	<!-- Details in ReferenceDescriptionActivity -->
 	<string name="fraisAgenceLocation">- Frais d\'agence: %1$.0f€</string>
@@ -97,4 +99,10 @@
 	    Je souhaiterais visiter le bien suivant : %1$s.\n\
 	    Pouvez-vous me contacter pour fixer un rendez-vous s\'il-vous-plaît ?</string>
 	
-</resources>
+
+	
+	<string name="message_zoom_touch_expand">Toucher une photo pour l\'agrandir</string>
+	<string name="description_zoom_touch_close">Expanded image (touch to close)</string>
+	<string name="description_image_1">Image 1</string>
+    <string name="description_image_2">Image 2</string>
+	</resources>

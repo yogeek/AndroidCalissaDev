@@ -1,0 +1,86 @@
+<!-- android:layout_height="?android:attr/listPreferredItemHeight" -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rechercheRow"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeightLarge"
+    android:padding="6dip" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:src="@drawable/loupe" />
+
+    <TextView
+        android:id="@+id/thirdLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/icon"
+        android:layout_below="@+id/secondLine"
+        android:layout_alignParentRight="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Prix"
+        android:textStyle="italic"
+        android:textSize="17sp" />
+    
+    <TextView
+        android:id="@+id/secondLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/icon"
+        android:layout_below="@+id/firstLine"
+        android:layout_alignParentRight="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Type"
+        android:textStyle="italic"
+        android:textSize="17sp" />
+    
+    <TextView
+        android:id="@+id/firstLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/icon"
+        android:layout_below="@+id/titleLine"
+        android:layout_alignWithParentIfMissing="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="VilleQuartier"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+    
+    <TextView
+        android:id="@+id/titleLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/icon"
+        android:layout_alignBaseline="@id/icon"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:text="NomRecherche"
+        android:textSize="20sp"
+        android:textColor="@color/brown_livingroom_dark"
+        android:textStyle="bold" />
+    
+    <ImageButton
+        android:id="@+id/deleteRow"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@color/brown_livingroom_light"
+        android:src="@android:drawable/ic_menu_delete" />
+
+</RelativeLayout> 

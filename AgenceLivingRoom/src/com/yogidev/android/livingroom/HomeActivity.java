@@ -28,6 +28,7 @@ public class HomeActivity extends Activity {
 	public static final int FIND_REFERENCE_OPTIONS_CODE = 3;
 	public static final int CONTACT_CARD_OPTIONS_CODE = 4;
 	public static final int MAP_ACTIVITY_OPTIONS_CODE = 5;
+	public static final int RECHERCHE_LIST_CODE = 6;
 	
 	Bundle objetbunble;
 	
@@ -117,6 +118,19 @@ public class HomeActivity extends Activity {
 		intent.putExtras(objetbunble);
 		startActivityForResult(intent, FIND_REFERENCE_OPTIONS_CODE);
 	}
+	
+    /**
+     * Go to "RechercheListActivity"
+     * 
+     * @param view
+     */
+	public void onMySearchClicked(View view) {
+		// Launch ReferenceListActivity
+		Intent intent = new Intent(HomeActivity.this, RechercheListActivity.class);
+		intent.putExtras(objetbunble);
+		startActivityForResult(intent, RECHERCHE_LIST_CODE);
+	}
+	
 	
     /**
      * Go to "MapActivity"

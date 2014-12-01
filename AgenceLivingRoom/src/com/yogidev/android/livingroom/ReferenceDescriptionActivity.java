@@ -19,6 +19,7 @@ import android.support.v4.view.ViewPager;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.yogidev.android.livingroom.data.bean.Reference;
+import com.yogidev.android.livingroom.data.util.Constants;
 
 
 public class ReferenceDescriptionActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -78,7 +80,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 	    }
 	    
 	    // Get the currentReference in bundle
-	    currentReference = getIntent().getParcelableExtra("currentReference");
+	    currentReference = getIntent().getParcelableExtra(Constants.CURRENT_REFERENCE);
 
 	    // Inflate the view from XML
 		setContentView(R.layout.reference_view_pager);
@@ -260,6 +262,28 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			ImageButton collectionButton = (ImageButton) rootView.findViewById(R.id.demo_collection_button);
 			new DownloadImageTask(collectionButton,getResources().getDrawable(R.drawable.logo)).execute(ref.getPhotos().get(0));
 			
+			// Go to collection gallery activity
+			collectionButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Intent intent = new Intent(getActivity(), CollectionGalleryActivity.class);
+					intent.putExtras(getActivity().getIntent().getExtras());
+					startActivity(intent);
+				}
+			});
+			
+			// Go to zoom gallery activity
+			collectionButton.setOnLongClickListener(new OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View v) {
+					// go to "zoom gallery" activity
+					Intent intent = new Intent(getActivity(), ZoomGalleryActivity.class);
+					intent.putExtras(getActivity().getIntent().getExtras());
+					startActivity(intent);
+					return false;
+				}
+			});
+			
 			// Fill the prix title
 			TextView prixTitleView = (TextView) rootView.findViewById(R.id.txtPrixTitre);
 			prixTitleView.setText((ref.isLocation()?"Loyer CC":"Prix FAI"));
@@ -336,15 +360,6 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 					
 			descView.setText(details);
 
-			// Demonstration of a collection-browsing activity.
-			collectionButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					Intent intent = new Intent(getActivity(), CollectionGalleryActivity.class);
-					intent.putExtras(getActivity().getIntent().getExtras());
-					startActivity(intent);
-				}
-			});
 
 			// Demonstration of navigating to external activities.
 //			rootView.findViewById(R.id.demo_external_activity)

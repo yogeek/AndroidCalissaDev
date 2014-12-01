@@ -1,5 +1,7 @@
 package com.yogidev.android.livingroom.data.bean;
 
+import java.io.Serializable;
+
 /**
  * Classe représentant une recherche de référence 
  * 
@@ -7,9 +9,11 @@ package com.yogidev.android.livingroom.data.bean;
  *
  */
 
-public class Recherche {
+public class Recherche implements Serializable {
 	
-	private long id = 0;
+	private static final long serialVersionUID = 1L;
+
+	private String name = "";
 	
 	private String ville = "";
 	
@@ -27,9 +31,9 @@ public class Recherche {
 	 * 
 	 */
 
-	public Recherche(long id, String ville, String quartier, String type,
+	public Recherche(String name, String ville, String quartier, String type,
 			boolean isLocation, String loyer) {
-		this.id = id;
+		this.name = name;
 		this.ville = ville;
 		this.quartier = quartier;
 		this.type = type;
@@ -48,13 +52,11 @@ public class Recherche {
 	}
 
 
-
-
 	/**
 	 * toString()
 	 */
 	public String toString(){
-		String str = 	"Recherche : " + this.getId() + "\n";
+		String str = 	"Recherche : " + this.getName() + "\n";
 		str += 			"Ville : " + this.getVille() + "\n";
 		str += 			"Quartier : " + this.getQuartier() + "\n";
 		str += 			"Type : " + this.getType() + "\n";
@@ -111,12 +113,12 @@ public class Recherche {
 		this.loyer = loyer;
 	}
 
-	public long getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

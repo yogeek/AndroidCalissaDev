@@ -117,7 +117,7 @@
 			          android:text="@string/choixLouer" 
 			          android:textSize="20sp"
 			          android:checked="true"
-			          android:onClick="onRadioButtonClicked" />
+			          />
 			
 			      <RadioButton
 			          android:id="@+id/radioVendre"
@@ -126,7 +126,7 @@
 			          android:layout_gravity="end"
 			          android:textSize="20sp"
 			          android:text="@string/choixVendre"
-			          android:onClick="onRadioButtonClicked" />
+			          />
 			
 			</RadioGroup>
 		   	     

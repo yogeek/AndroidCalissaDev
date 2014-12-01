@@ -72,7 +72,8 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:background="@android:color/transparent"
-	                android:src="@drawable/coeur" />
+	                android:src="@drawable/coeur"
+	                android:onClick="onMySearchClicked" />
 
 	            <Button
 	                android:id="@+id/button2"
@@ -80,7 +81,8 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:layout_margin="10dp"
-	                android:text="@string/mesRecherches" />
+	                android:text="@string/mesRecherches"
+	                android:onClick="onMySearchClicked" />
 	        
 	        </LinearLayout>
 	    

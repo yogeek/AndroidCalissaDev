@@ -1,25 +1,40 @@
 package com.yogidev.android.livingroom;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.yogidev.android.livingroom.SwipeListView.SwipeListViewCallback;
+import com.yogidev.android.livingroom.data.bean.Recherche;
 import com.yogidev.android.livingroom.data.bean.Reference;
 import com.yogidev.android.livingroom.data.mock.MockReferenceList;
+import com.yogidev.android.livingroom.data.util.Constants;
+import com.yogidev.android.livingroom.data.util.SerialTool;
 
 public class ReferenceListActivity extends ListActivity implements SwipeListViewCallback {
 	
 //	private ListView mListView;
 	private ReferenceListAdapter mAdapter;
 	
+	public static final int SETTING_OPTIONS_CODE = 1;
+	public static final int SAVE_REFERENCE_OPTIONS_CODE = 2;
 	private static final int REFERENCE_DESCRIPTION_CODE = 4;
 	
 	// The bundle to pass and receive data to and from other activities
 	Bundle objetbunble;
+	
+	// Current "Recherche" details
+	Recherche currentRecherche;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -56,30 +71,9 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
         
 	    setListAdapter(mAdapter);
 	    
-        // get content of the "recherche" object
-//        String[] rechercheDetails;
-//        if (objetbunble != null) {
-//        	rechercheDetails = (String[]) objetbunble.get("recherche");
-//        
-//	        // AlertDialog to display the content
-//			AlertDialog.Builder adbRechercheContent = new AlertDialog.Builder(this);
-//			adbRechercheContent.setTitle("Détails de la recherche");
-//			adbRechercheContent.setPositiveButton("Ok", null);
-//			String message = "Ville : "    + rechercheDetails[0] + "/n";
-//			message 	  += "Quartier : " + rechercheDetails[1] + "/n";
-//			message 	  += "Type : "     + rechercheDetails[2] + "/n";
-//			message 	  += "Location : " + rechercheDetails[3] + "/n";
-//			message 	  += "Loyer : " + rechercheDetails[4] + "/n";
-//			adbRechercheContent.setMessage(message);
-//			adbRechercheContent.show();
-//        }
-//        else {
-//        	AlertDialog.Builder adbRechercheContent = new AlertDialog.Builder(this);
-//			adbRechercheContent.setTitle("Détails de la recherche");
-//			adbRechercheContent.setPositiveButton("Ok", null);
-//			adbRechercheContent.setMessage("Recherche vide !!!");
-//        }
-	    
+        /// get content of the "recherche" object
+	    currentRecherche = (Recherche) objetbunble.getSerializable(Constants.CURRENT_RECHERCHE);
+       	
 	    // Get the Action Bar 
 	    ActionBar actionBar = getActionBar();
 	    // Enable the app icon as an Up button
@@ -92,6 +86,82 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	    actionBar.setDisplayUseLogoEnabled(true);
 	
 	}
+	
+	
+	/**
+	 * Inflate the action bar menu
+	 * 
+	 */
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.result_recherche, menu);
+		return true;
+	}
+
+	/**
+	 * Manage the action bar options
+	 * 
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		Intent intent = null;
+		switch (item.getItemId()) {
+		
+			case R.id.action_settings:
+				// Launch Settings Activity
+				intent = new Intent(ReferenceListActivity.this, SettingsActivity.class);
+				intent.putExtras(objetbunble);
+				startActivityForResult(intent, SETTING_OPTIONS_CODE);
+				return true;
+				
+			case R.id.action_saveRecherche:
+				// Ask for a name
+				final EditText input = new EditText(this);
+				new AlertDialog.Builder(ReferenceListActivity.this)
+			    .setTitle("Nom de la recherche")
+			    .setMessage("Choisir un nom pour la recherche")
+			    .setView(input)
+			    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int whichButton) {
+			            String value = input.getText().toString(); 
+			            Context ctx = getApplicationContext();
+			            // Check if the name already exists
+			            if (SerialTool.isRechercheNameFree(value, ctx)) {
+				            // Save the current "Recherche" object
+				            currentRecherche.setName(value);
+				            SerialTool.saveRecherche(currentRecherche, ctx);
+				            Toast.makeText(ctx, "Recherche enregistrée !",Toast.LENGTH_SHORT).show();
+			            }
+			            else {
+			            	Toast.makeText(ctx, "Ce nom est déjà utilisé. Veuillez en choisir un autre.",Toast.LENGTH_SHORT).show();
+			            	input.setText("");
+			            }
+			        }
+			    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int whichButton) {
+			            // Do nothing.
+			        }
+			    }).show();
+				
+				// Save it also into SharedPrefs
+				Editor editor = PreferencesManager.getInstance().getPrefEditor();
+				editor.putString(Constants.RECHERCHE_VILLE, currentRecherche.getVille());
+				editor.putString(Constants.RECHERCHE_QUARTIER, currentRecherche.getQuartier());
+				editor.putString(Constants.RECHERCHE_TYPE, currentRecherche.getType());
+				editor.putBoolean(Constants.RECHERCHE_IS_LOCATION, currentRecherche.isLocation());
+				editor.putString(Constants.RECHERCHE_PRIX, currentRecherche.getLoyer());
+				editor.commit(); 
+
+				return true;
+				
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
 	
 	
 	@Override
@@ -115,7 +185,7 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 		// Launch the Description activity
 		Intent intent = new Intent(ReferenceListActivity.this, ReferenceDescriptionActivity.class);
 		// Store the parceable Reference
-		intent.putExtra("currentReference", item);
+		intent.putExtra(Constants.CURRENT_REFERENCE, item);
 		startActivityForResult(intent, REFERENCE_DESCRIPTION_CODE);
 	}
 	

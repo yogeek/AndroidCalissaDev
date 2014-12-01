@@ -128,6 +128,15 @@
         </activity>
         
         <activity 
+            android:name="ZoomGalleryActivity" 
+            android:label="@string/zoomGallery" 
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ReferenceListActivity" />
+        </activity>
+        
+        <activity 
             android:name="ContactCardFlipActivity" 
             android:parentActivityName=".HomeActivity" 
             >
@@ -147,7 +156,15 @@
                 android:value=".HomeActivity" />
         </activity>
         
-        
+        <activity
+            android:name="RechercheListActivity"
+            android:parentActivityName=".HomeActivity" 
+            >
+            <!-- Parent activity meta-data to support API level 7+ -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
         
     </application>
 

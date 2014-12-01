@@ -48,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yogidev.android.livingroom.data.bean.Reference;
+import com.yogidev.android.livingroom.data.util.Constants;
 
 
 public class CollectionGalleryActivity extends FragmentActivity {
@@ -87,13 +88,10 @@ public class CollectionGalleryActivity extends FragmentActivity {
 	    	objetbunble = new Bundle();
 	    }
         
-	    currentReference = getIntent().getParcelableExtra("currentReference");
+	    currentReference = getIntent().getParcelableExtra(Constants.CURRENT_REFERENCE);
 	    
         setContentView(R.layout.reference_collection_gallery);
         
-		// set transparency 
-//		getWindow().getDecorView().getRootView().setAlpha(PreferencesManager.TRANPARENCY);
-
         // Create an adapter that when requested, will return a fragment representing an object in
         // the collection.
         // 
@@ -188,7 +186,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
     }
 
     /**
-     * A dummy fragment representing a section of the app, but that simply displays dummy text.
+     * A fragment displaying the photos of the reference in a gallery-like format
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN) public static class DemoObjectFragment extends Fragment {
 
@@ -210,10 +208,8 @@ public class CollectionGalleryActivity extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_collection_photo, container, false);
-            System.out.println("root View 1 = " + rootView);
             
             // white background
-            System.out.println("rootView BG => NULL !");
             rootView.setBackground(null);
             rootView.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
             
@@ -223,7 +219,6 @@ public class CollectionGalleryActivity extends FragmentActivity {
             imgView = (ImageView)rootView.findViewById(android.R.id.text1);
             
             if (imgView != null && imgView.getParent() != null) {
-            	System.out.println("imgView.PARENT BG => NULL !");
             	((View) imgView.getParent()).setBackground(null);
             	((View) imgView.getParent()).setBackgroundColor(getActivity().getResources().getColor(R.color.white));
             }
@@ -253,7 +248,7 @@ public class CollectionGalleryActivity extends FragmentActivity {
         	protected void onPreExecute() {
         		super.onPreExecute();
         		pDialog = new ProgressDialog(context);
-        		pDialog.setMessage("Loading Image ....");
+        		pDialog.setMessage("Chargement de l'image...");
         		pDialog.show();
         	}
         	
