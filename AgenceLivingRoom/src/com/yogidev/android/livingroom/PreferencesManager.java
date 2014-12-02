@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.ColorDrawable;
 
+import com.yogidev.android.livingroom.data.bean.Recherche;
+import com.yogidev.android.livingroom.data.util.Constants;
+
 public class PreferencesManager {
 
 	// Preferences File
@@ -78,6 +81,16 @@ public class PreferencesManager {
 		}
 			
 		return cd;
+	}
+	
+	public void saveCurrrentRecherchePref(Recherche currentRecherche) {
+		Editor editor = getPrefEditor();
+		editor.putString(Constants.RECHERCHE_VILLE, currentRecherche.getVille());
+		editor.putString(Constants.RECHERCHE_QUARTIER, currentRecherche.getQuartier());
+		editor.putString(Constants.RECHERCHE_TYPE, currentRecherche.getType());
+		editor.putBoolean(Constants.RECHERCHE_IS_LOCATION, currentRecherche.isLocation());
+		editor.putString(Constants.RECHERCHE_PRIX, currentRecherche.getLoyer());
+		editor.commit();
 	}
 	
 	/**

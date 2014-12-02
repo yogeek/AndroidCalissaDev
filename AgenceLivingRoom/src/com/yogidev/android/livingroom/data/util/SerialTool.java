@@ -174,6 +174,16 @@ public class SerialTool {
 
 		return resultList;
 	}
+	
+	// is the Recherche already in the favorites ?
+	public static String getAlreadySavedName(Recherche currentRecherche, Context ctx) {
+		String name = "";
+		if (getAllSavedRecherche(ctx).contains(currentRecherche)) {
+			int index = getAllSavedRecherche(ctx).indexOf(currentRecherche);
+			name = getAllSavedRecherche(ctx).get(index).getName();
+		}
+		return name;
+	}
 
 
 	/**

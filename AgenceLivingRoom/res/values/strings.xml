@@ -37,6 +37,11 @@
         <item quantity="other">Résultats (%d)</item>
     </plurals>
     
+    <plurals name="numberOfRecherches">
+        <item quantity="one">Recherche enregistrée (%d)</item>
+        <item quantity="other">Recherches enregistrées (%d)</item>
+    </plurals>
+    
     <string name="boutonValider">Valider</string>
     <string name="boutonRechercher">Rechercher</string>
 	<string name="boutonModifier">Modifier</string>

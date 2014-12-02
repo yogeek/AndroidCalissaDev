@@ -64,7 +64,7 @@ public class RechercheListActivity extends ListActivity implements SwipeListView
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    
 	    // Set title
-	    actionBar.setTitle(getResources().getQuantityString(R.plurals.numberOfResults, mAdapter.getCount(), mAdapter.getCount()));
+	    actionBar.setTitle(getResources().getQuantityString(R.plurals.numberOfRecherches, mAdapter.getCount(), mAdapter.getCount()));
 	    // Set logo
 	    //actionBar.setLogo(R.drawable.partage);
 	    actionBar.setDisplayUseLogoEnabled(true);

@@ -114,6 +114,10 @@ public class RechercheListAdapter extends BaseAdapter {
 
 		Recherche ref = values.get(position);
 
+		// Image de la recherche
+//		ImageView icon = (ImageView) view.findViewById(R.id.icon);
+//		icon.setImageDrawable(this.context.getResources().getDrawable(ref.getIconDrawable()));
+		
 		// Nom de la recherche
 		TextView titleLine = (TextView) view.findViewById(R.id.titleLine);
 		titleLine.setText(ref.getName());

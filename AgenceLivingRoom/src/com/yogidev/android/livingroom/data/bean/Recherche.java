@@ -2,6 +2,8 @@ package com.yogidev.android.livingroom.data.bean;
 
 import java.io.Serializable;
 
+import com.yogidev.android.livingroom.R;
+
 /**
  * Classe représentant une recherche de référence 
  * 
@@ -120,7 +122,55 @@ public class Recherche implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	
+	@Override
+	public boolean equals(Object o) {
+		
+		boolean ret = false;
+		
+		if (o != null && o instanceof Recherche) {
+			Recherche another = (Recherche)o;
+			if (! this.getName().isEmpty())
+				ret = this.getName().equals(another.getName());
+			else {
+				
+				ret =  this.getVille().equals(another.getVille())  
+						&& this.getQuartier().equals(another.getQuartier())
+						&& this.getType().equals(another.getType())
+						&& this.isLocation() == another.isLocation() 	 
+						&& this.getLoyer().equals(another.getLoyer());
+			}
+		}
+		return ret;
+	}
 	
+	public int getIconDrawable() {
+		String markerType = this.getType() + "-" + (this.isLocation()?"Location":"Vente");
+		int marker = R.drawable.loupe;
+		if (markerType.equals("T1-Location"))
+			marker = R.drawable.marqueur_location_t1;
+		if (markerType.equals("T2-Location"))
+			marker = R.drawable.marqueur_location_t2;
+		if (markerType.equals("T3-Location"))
+			marker = R.drawable.marqueur_location_t3;
+		if (markerType.equals("T4-Location"))
+			marker = R.drawable.marqueur_location_t4;
+		if (markerType.equals("T5-Location"))
+			marker = R.drawable.marqueur_location_t5;
+		if (markerType.equals("T1-Vente"))
+			marker = R.drawable.marqueur_vente_t1;
+		if (markerType.equals("T2-Vente"))
+			marker = R.drawable.marqueur_vente_t2;
+		if (markerType.equals("T3-Vente"))
+			marker = R.drawable.marqueur_vente_t3;
+		if (markerType.equals("T4-Vente"))
+			marker = R.drawable.marqueur_vente_t4;
+		if (markerType.equals("T5-Vente"))
+			marker = R.drawable.marqueur_vente_t5;
+		
+		return marker;
+		
+	}
 
 }

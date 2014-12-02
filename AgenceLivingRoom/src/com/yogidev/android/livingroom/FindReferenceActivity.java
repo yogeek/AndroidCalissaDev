@@ -184,6 +184,7 @@ public class FindReferenceActivity extends Activity {
 	    					// Recherche recherche = new Recherche(ville, quartier, type, isLocation, loyer);
 	    					// SerialTool.saveRecherche(recherche, getApplicationContext());
 	    					objetbunble.putSerializable(Constants.CURRENT_RECHERCHE, new Recherche(ville, quartier, type, isLocation, loyer));
+	    					PreferencesManager.getInstance().saveCurrrentRecherchePref(new Recherche(ville, quartier, type, isLocation, loyer));
 
 	    					// Launch RechercheListActivity
 	    					Intent intent = new Intent(FindReferenceActivity.this, ReferenceListActivity.class);

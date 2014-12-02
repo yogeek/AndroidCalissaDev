@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -35,6 +36,9 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	
 	// Current "Recherche" details
 	Recherche currentRecherche;
+	
+	// is the "Recherche" already saved
+	boolean alreadySaved = false;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -97,6 +101,22 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 		getMenuInflater().inflate(R.menu.result_recherche, menu);
 		return true;
 	}
+	
+	/**
+	 * Call after invalidateOptionsMenu()
+	 * 
+	 */
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    MenuItem starButton = menu.findItem(R.id.action_saveRecherche);     
+	    if ( !(SerialTool.getAlreadySavedName(currentRecherche, getApplicationContext())).isEmpty()) {
+	        starButton.setIcon(android.R.drawable.btn_star_big_on);
+	    } 
+	    else{
+	    	starButton.setIcon(android.R.drawable.btn_star_big_off);
+	    }
+	    return super.onPrepareOptionsMenu(menu);
+
+	}
 
 	/**
 	 * Manage the action bar options
@@ -108,6 +128,8 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		Intent intent = null;
+		final Context ctx = getApplicationContext();
+
 		switch (item.getItemId()) {
 		
 			case R.id.action_settings:
@@ -118,48 +140,87 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 				return true;
 				
 			case R.id.action_saveRecherche:
-				// Ask for a name
-				final EditText input = new EditText(this);
-				new AlertDialog.Builder(ReferenceListActivity.this)
-			    .setTitle("Nom de la recherche")
-			    .setMessage("Choisir un nom pour la recherche")
-			    .setView(input)
-			    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int whichButton) {
-			            String value = input.getText().toString(); 
-			            Context ctx = getApplicationContext();
-			            // Check if the name already exists
-			            if (SerialTool.isRechercheNameFree(value, ctx)) {
-				            // Save the current "Recherche" object
-				            currentRecherche.setName(value);
-				            SerialTool.saveRecherche(currentRecherche, ctx);
-				            Toast.makeText(ctx, "Recherche enregistrée !",Toast.LENGTH_SHORT).show();
-			            }
-			            else {
-			            	Toast.makeText(ctx, "Ce nom est déjà utilisé. Veuillez en choisir un autre.",Toast.LENGTH_SHORT).show();
-			            	input.setText("");
-			            }
-			        }
-			    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int whichButton) {
-			            // Do nothing.
-			        }
-			    }).show();
+				// Check if the Recherche is not already saved
+				final String name = SerialTool.getAlreadySavedName(currentRecherche,ctx);
+				if (!name.isEmpty()) {
+					// Recherche already saved => rename ?
+					new AlertDialog.Builder(ReferenceListActivity.this)
+					.setTitle("Recherche existante")
+					.setMessage("Cette recherche est déjà enregistrée sous le nom '" + name + "'")
+					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+							// do nothing
+						}
+					}).setNegativeButton("Renommer", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+							// delete the Recherche to save it with another name on the next AlertDialog
+							SerialTool.deleteRecherche(name, ctx);
+							// Ask for a name
+							showSaveRechercheDialog();
+						
+							// Save it also into SharedPrefs
+							Editor editor = PreferencesManager.getInstance().getPrefEditor();
+							editor.putString(Constants.RECHERCHE_VILLE, currentRecherche.getVille());
+							editor.putString(Constants.RECHERCHE_QUARTIER, currentRecherche.getQuartier());
+							editor.putString(Constants.RECHERCHE_TYPE, currentRecherche.getType());
+							editor.putBoolean(Constants.RECHERCHE_IS_LOCATION, currentRecherche.isLocation());
+							editor.putString(Constants.RECHERCHE_PRIX, currentRecherche.getLoyer());
+							editor.commit();
+						}
+					}).show();
+				}
+				else {
+					// new Recherche to save
+					showSaveRechercheDialog();
+				}
 				
-				// Save it also into SharedPrefs
-				Editor editor = PreferencesManager.getInstance().getPrefEditor();
-				editor.putString(Constants.RECHERCHE_VILLE, currentRecherche.getVille());
-				editor.putString(Constants.RECHERCHE_QUARTIER, currentRecherche.getQuartier());
-				editor.putString(Constants.RECHERCHE_TYPE, currentRecherche.getType());
-				editor.putBoolean(Constants.RECHERCHE_IS_LOCATION, currentRecherche.isLocation());
-				editor.putString(Constants.RECHERCHE_PRIX, currentRecherche.getLoyer());
-				editor.commit(); 
-
 				return true;
 				
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	// Show an AlertDialog to save the Recherche choosing a name 
+	public void showSaveRechercheDialog() {
+		final Context ctx = getApplicationContext();
+		final EditText input = new EditText(ctx);
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ReferenceListActivity.this);
+		dialogBuilder.setTitle("Enregistrer la recherche");
+		dialogBuilder.setMessage("Choisir un nom pour la recherche");
+		dialogBuilder.setView(input);
+		dialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int whichButton) {
+	            String value = input.getText().toString(); 
+	            if (value.isEmpty()) {
+	            	Toast.makeText(ctx, "Le nom ne peut pas être vide.",Toast.LENGTH_SHORT).show();
+	            }
+	            else {
+		            // Check if the name already exists
+		            if (SerialTool.isRechercheNameFree(value, ctx)) {
+			            // Save the current "Recherche" object
+			            currentRecherche.setName(value);
+			            SerialTool.saveRecherche(currentRecherche, ctx);
+			            Toast.makeText(ctx, "Recherche '" + value + "' enregistrée !",Toast.LENGTH_SHORT).show();
+			            // Call invalidateOptionsMenu to force the onPrepareOptionsMenu call (to update the action bar menu items)
+			            invalidateOptionsMenu();
+		            }
+		            else {
+		            	Toast.makeText(ctx, "Ce nom est déjà utilisé. Veuillez en choisir un autre.",Toast.LENGTH_SHORT).show();
+		            	input.setText("");
+		            }
+	            }
+	        }
+	    });
+		dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int whichButton) {
+	            // Do nothing.
+	        }
+	    });
+		input.setRawInputType(InputType.TYPE_CLASS_TEXT);
+		input.setTextColor(R.color.black);
+		dialogBuilder.show();
+//	    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 	}
 	
 	
