@@ -18,11 +18,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,8 @@ import com.yogidev.android.livingroom.data.util.Constants;
 
 public class ReferenceDescriptionActivity extends FragmentActivity implements ActionBar.TabListener {
 
+	public static final int SETTING_OPTIONS_CODE = 1;
+	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
 	 * three primary sections of the app. We use a {@link android.support.v4.app.FragmentPagerAdapter}
@@ -60,6 +65,10 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 	Bundle objetbunble;
 	
 	Reference currentReference;
+	
+	private ShareActionProvider mShareActionProvider;
+	
+	
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -97,8 +106,7 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 
-		// Specify that the Home/Up button should not be enabled, since there is no hierarchical
-		// parent.
+		// Specify that the Home/Up button should not be enabled, since there is no hierarchical parent.
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayUseLogoEnabled(true);
 
@@ -156,7 +164,99 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
         	mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
         }
     }
-   
+    
+	/**
+	 * Inflate the action bar menu
+	 * 
+	 */
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.reference_description, menu);
+		
+//		// Locate MenuItem with ShareActionProvider
+//		MenuItem item = menu.findItem(R.id.action_share);
+//
+//	    // Fetch and store ShareActionProvider
+//	    mShareActionProvider = (ShareActionProvider) item.getActionProvider(); 
+//	    
+////	    mShareActionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+//	    mShareActionProvider.setShareIntent(createShareIntent());
+		
+		return true;
+	}
+	
+//	private Intent createShareIntent() {
+//		// Share intent
+//		Intent shareIntent = new Intent();
+//		shareIntent.setAction(Intent.ACTION_SEND);
+//		shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Partage de référence chez LivingRoom");
+//		shareIntent.putExtra(Intent.EXTRA_TEXT, 
+//				getString(R.string.shareReferenceMessage, 
+//				currentReference.getId(), 
+//				currentReference.getVille(),
+//				currentReference.getQuartier(),
+//				currentReference.getTypeRef()
+//				));
+//		shareIntent.setType("text/plain");
+//		setShareIntent(shareIntent);
+//		return shareIntent; 
+//	}
+//
+//	// Call to update the share intent
+//	private void setShareIntent(Intent shareIntent) {
+//	    if (mShareActionProvider != null) {
+//	        mShareActionProvider.setShareIntent(shareIntent);
+//	    }
+//	}
+	
+	/**
+	 * Manage the action bar options
+	 * 
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		Intent intent = null;
+
+		switch (item.getItemId()) {
+		
+			case R.id.action_home:
+				// back to Home Activity
+				intent = new Intent(this, HomeActivity.class);
+				intent.putExtras(objetbunble);
+		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		        startActivity(intent);
+				return true;	
+				
+			case R.id.action_share:
+				// Share intent (if we use the ShareProvider as commented above, the most often app for sharing is added in the action bar... beurk !)
+				intent = new Intent(Intent.ACTION_SEND);
+				intent.putExtra(Intent.EXTRA_SUBJECT, "Partage de référence chez LivingRoom");
+				intent.putExtra(Intent.EXTRA_TEXT, 
+						getString(R.string.shareReferenceMessage, 
+						currentReference.getId(), 
+						currentReference.getVille(),
+						currentReference.getQuartier(),
+						currentReference.getTypeRef()
+						));
+				intent.setType("text/plain");
+				startActivity(Intent.createChooser(intent, getResources().getText(R.string.shareTo)));
+				return true;	
+		
+			case R.id.action_settings:
+				// Launch Settings Activity
+				intent = new Intent(this, SettingsActivity.class);
+				intent.putExtras(objetbunble);
+				startActivityForResult(intent, SETTING_OPTIONS_CODE);
+				return true;
+				
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
     
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary

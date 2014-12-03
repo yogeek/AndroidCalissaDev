@@ -70,12 +70,11 @@
                 
         <activity
             android:name="SettingsActivity"
-            android:parentActivityName=".HomeActivity" 
             >
             <!-- Parent activity meta-data to support API level 7+ -->
-            <meta-data
+            <!-- meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".HomeActivity" /-->
         </activity>
         
         <activity

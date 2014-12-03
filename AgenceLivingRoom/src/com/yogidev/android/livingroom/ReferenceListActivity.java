@@ -86,7 +86,6 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	    // Set title
 	    actionBar.setTitle(getResources().getQuantityString(R.plurals.numberOfResults, mAdapter.getCount(), mAdapter.getCount()));
 	    // Set logo
-	    //actionBar.setLogo(R.drawable.partage);
 	    actionBar.setDisplayUseLogoEnabled(true);
 	
 	}
@@ -131,6 +130,14 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 		final Context ctx = getApplicationContext();
 
 		switch (item.getItemId()) {
+		
+			case R.id.action_home:
+				// back to Home Activity
+				intent = new Intent(this, HomeActivity.class);
+				intent.putExtras(objetbunble);
+		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		        startActivity(intent);
+				return true;	
 		
 			case R.id.action_settings:
 				// Launch Settings Activity

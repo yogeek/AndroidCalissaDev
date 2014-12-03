@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -41,7 +42,7 @@ public class SettingsActivity extends Activity {
 	    // Set title
 	    actionBar.setTitle(R.string.action_settings);
 	    // Set logo
-	    // actionBar.setLogo(R.drawable.rouages);
+	     actionBar.setLogo(R.drawable.rouages);
 	    
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
@@ -59,6 +60,18 @@ public class SettingsActivity extends Activity {
 	    
 	
 	}
+	
+	// Go back on Up button because "Settings" is in multiple screen
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}	
+	}
+
 	
 	
 	// This method hides the system bars and resize the content

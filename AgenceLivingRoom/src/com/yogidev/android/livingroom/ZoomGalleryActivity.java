@@ -69,51 +69,6 @@ public class ZoomGalleryActivity extends FragmentActivity {
         // Set background
 	    findViewById(R.id.containerZoom).setBackground(PreferencesManager.getInstance().getBackgoundColorPref());
         
-        // Get the GridLayout to fill it with thumbnails
-//        GridLayout zoomLinear = (GridLayout)findViewById(R.id.zoomGrid);
-//        
-// 
-//        // Size calculus
-//        Point size = new Point();
-//        getWindowManager().getDefaultDisplay().getSize(size);
-//        int screenWidth = size.x;
-//        int tiersScreenWidth = (int)(screenWidth/3);
-//        
-//        // Construct the grid cells dynamically with the reference photos as TouchHighlightImageButton
-//        int photoIndex = 0;
-//        while (photoIndex < currentReference.getPhotos().size()) {
-//	        for (int colIndex = 0; colIndex < zoomLinear.getColumnCount() && photoIndex < currentReference.getPhotos().size(); colIndex++) {
-//	        	
-//	        	final String photo = currentReference.getPhotos().get(photoIndex);
-//	        	
-//	        	// Create a touch highlight button
-//	        	final TouchHighlightImageButton btnPhoto = new TouchHighlightImageButton(this);
-//	        	btnPhoto.setId(photoIndex);
-//	        	
-//	        	// layout = row (photoIndex modulo 3 pour avoir 0,1,2;0,1,2...) / col (colIndex)
-//	        	int rowInd = photoIndex/3;
-//	        	int colInd = colIndex;
-////	        	GridLayout.LayoutParams params = new GridLayout.LayoutParams(GridLayout.spec(rowInd), GridLayout.spec(colInd));
-////	        	GridLayout.LayoutParams params = new GridLayout.LayoutParams(new ViewGroup.MarginLayoutParams(tiersScreenWidth-10,150-10));
-////	            params.setMargins(5, 5, 5, 5);
-//	        	GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-//	            params.setGravity(Gravity.CENTER);
-//	        	btnPhoto.setLayoutParams(params);
-//	        	
-//	        	btnPhoto.setScaleType(ScaleType.CENTER_CROP);
-//	        	// fill the Image button with the current photo
-//	        	new DownloadImageTask(btnPhoto,getResources().getDrawable(R.drawable.logo)).execute(photo);
-//	        	btnPhoto.setOnClickListener(new View.OnClickListener() {
-//	                @Override
-//	                public void onClick(View view) {
-//	                    zoomImageFromThumb(btnPhoto, photo);
-//	                }
-//	            });
-//	        	zoomLinear.addView(btnPhoto);
-//	        	photoIndex++;
-//	        }
-//        }
-        
         //--------------------------- Grid View --------------------------------
         
         GridView gridView = (GridView) findViewById(R.id.gridView);
@@ -123,11 +78,11 @@ public class ZoomGalleryActivity extends FragmentActivity {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				v.setSelected(true);
-				Toast.makeText(ZoomGalleryActivity.this, "Titre de la photo " + (position-1) , Toast.LENGTH_SHORT).show();
+				Toast.makeText(ZoomGalleryActivity.this, "Titre de la photo " + (position+1) , Toast.LENGTH_SHORT).show();
 				zoomImageFromThumb(v, currentReference.getPhotos().get(position));
 			}
 
-	});
+		});
         
         
         //-----------------------------------------------------------------------

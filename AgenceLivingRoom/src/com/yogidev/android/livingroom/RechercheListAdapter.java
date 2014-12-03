@@ -100,8 +100,6 @@ public class RechercheListAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		
-		System.out.println("getView " + position);
-		
 		View view = convertView;
 		
 		if (convertView == null) {
@@ -126,7 +124,7 @@ public class RechercheListAdapter extends BaseAdapter {
 		firstLine.setText(ref.getVille() + (ref.getQuartier().isEmpty()?"":" - " + ref.getQuartier()));
 		// Details
 		TextView secondLine = (TextView) view.findViewById(R.id.secondLine);
-		secondLine.setText("Type " + ref.getType());	
+		secondLine.setText("Type : " + ref.getType());	
 		// Location + Loyer / Vente
 		TextView thirdLine = (TextView) view.findViewById(R.id.thirdLine);
 		String prix = ref.isLocation()?ref.getLoyer():"Vente";

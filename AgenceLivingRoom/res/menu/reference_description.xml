@@ -13,12 +13,15 @@
         />
     
     <item
-        android:id="@+id/action_saveRecherche"
+        android:id="@+id/action_share"
         android:orderInCategory="110"
-        android:title="@string/action_saveRecherche"
+        android:title="@string/action_share"
         app:showAsAction="ifRoom"
         android:showAsAction="ifRoom"
-        android:icon="@android:drawable/btn_star_big_off"/>
+        android:icon="@drawable/partage"/>
+    	<!-- uncomment this to use the ShareActionProvider that displays the most often sharing app aside to the share icon -->
+        <!-- android:actionProviderClass=
+                "android.widget.ShareActionProvider"-->
 
     <item
         android:id="@+id/action_settings"

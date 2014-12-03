@@ -4,10 +4,12 @@
     <string name="app_name">AgenceLivingRoom</string>
     
     <string name="action_settings">Paramètres</string>
+    <string name="action_home">Accueil</string>
     <string name="day_night">Day/Night</string>
     <string name="action_about">A propos</string>
     <string name="action_infos">Infos</string>
     <string name="action_saveRecherche">Enregistrer la recherche</string>
+    <string name="action_share">Partager</string>
     
     <string name="logo_desc">Logo de l\'application</string>
     <string name="description">Application mobile de l\'agence immobilière Living Room</string>
@@ -104,10 +106,15 @@
 	    Je souhaiterais visiter le bien suivant : %1$s.\n\
 	    Pouvez-vous me contacter pour fixer un rendez-vous s\'il-vous-plaît ?</string>
 	
-
-	
 	<string name="message_zoom_touch_expand">Toucher une photo pour l\'agrandir</string>
 	<string name="description_zoom_touch_close">Expanded image (touch to close)</string>
 	<string name="description_image_1">Image 1</string>
     <string name="description_image_2">Image 2</string>
+    
+    <string name="shareTo">Partager avec...</string>
+    <string name="shareReferenceMessage">J\'ai trouvé ce bien chez l\'agence LivingRoom. Je pense que cela pourrait vous intéresser.\n\n\
+        Référence : %1$s\n\
+        Ville : %2$s\n\
+        Quartier : %3$s\n\
+        Type : %4$s\n\</string>
 	</resources>

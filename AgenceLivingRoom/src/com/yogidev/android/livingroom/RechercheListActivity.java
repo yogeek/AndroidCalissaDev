@@ -71,6 +71,10 @@ public class RechercheListActivity extends ListActivity implements SwipeListView
 	
 	}
 	
+	public RechercheListAdapter getAdapter() {
+		return this.mAdapter;
+	}
+	
 	
 	@Override
 	public void onSwipeItem(boolean isRight, int position) {
@@ -114,7 +118,13 @@ public class RechercheListActivity extends ListActivity implements SwipeListView
     @Override
     public void onResume() {
         super.onResume();
+
+//        if (getListView() != null)
+//        {
+//        	setListAdapter(new RechercheListAdapter(this, SerialTool.getAllSavedRecherche(getApplicationContext())));
+//        	this.mAdapter.notifyDataSetChanged();
+//        }
     }
-	
+
 
 }
