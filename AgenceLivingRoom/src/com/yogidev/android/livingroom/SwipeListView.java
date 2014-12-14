@@ -115,15 +115,12 @@ public class SwipeListView {
 		public boolean onDown(MotionEvent e) {
 
 			temp_position = list.pointToPosition((int) e.getX(), (int) e.getY());
-			System.out.println("EVENT 'onDown' on " + temp_position);
 			return super.onDown(e);
 		}
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
-			
-			System.out.println("EVENT 'onFling' on " + e1.getX() + " ; " + e2.getX());
 			
 			if (Math.abs(e1.getY() - e2.getY()) > REL_SWIPE_MAX_OFF_PATH)
 				return false;

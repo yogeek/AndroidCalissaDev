@@ -86,8 +86,6 @@ public class RechercheListActivity extends ListActivity implements SwipeListView
 	@Override
 	public void onItemClickListener(ListAdapter adapter, int position) {
 		
-		System.out.println("EVENT 'onItemClickListener' on " + position);
-		
 		final Recherche item = (Recherche) adapter.getItem(position);	
 		Toast.makeText(this, "Affichage de la recherche '" + item.getName() + "' !", Toast.LENGTH_SHORT).show();
 		

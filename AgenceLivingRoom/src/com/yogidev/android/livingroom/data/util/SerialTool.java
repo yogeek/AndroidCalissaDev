@@ -147,7 +147,6 @@ public class SerialTool {
 			    File[] flists = myDirectory.listFiles(new FileFilter() {
 			        @Override
 			        public boolean accept(File file) {
-			        	System.out.println("File found => " + file.getName());
 			            return p.matcher(file.getName()).matches();
 			        }
 			    });

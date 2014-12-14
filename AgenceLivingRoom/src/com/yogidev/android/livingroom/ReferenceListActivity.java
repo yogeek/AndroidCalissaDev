@@ -242,8 +242,6 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	@Override
 	public void onItemClickListener(ListAdapter adapter, int position) {
 		
-		System.out.println("EVENT 'onItemClickListener' on " + position);
-		
 		final Reference item = (Reference) adapter.getItem(position);	
 		Toast.makeText(this, "Affichage de la référence '" + item.getTitreRef() + "' !", Toast.LENGTH_SHORT).show();
 		// set the flag to make the "delete" button disappear

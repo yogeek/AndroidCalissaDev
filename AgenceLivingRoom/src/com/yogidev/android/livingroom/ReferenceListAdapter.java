@@ -82,8 +82,6 @@ public class ReferenceListAdapter extends BaseAdapter {
 	 */
 	public void onSwipeItem(boolean isRight, int position) {
 		
-		System.out.println("onSwipeItem [ " + (isRight?"RIGHT":"LEFT") + " ] at : " + position);
-		
 		SWIPE_POS = position;
 		
 		// Swipe to the left : position the DELETE_POS flag to be able to display the "delete" button in getView()
@@ -101,8 +99,6 @@ public class ReferenceListAdapter extends BaseAdapter {
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		
-		System.out.println("getView " + position);
 		
 		View view = convertView;
 		

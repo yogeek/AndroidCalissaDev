@@ -72,11 +72,9 @@ public class PreferencesManager {
 		ColorDrawable cd;
 		if (getThemePref()==THEME_LIGHT) {
 			cd = new ColorDrawable(LivingRoomApplication.mContext.getResources().getColor(BG_COLOR_LIGHT));
-			System.out.println("THEME LIGHT = " + BG_COLOR_LIGHT);
 		}
 		else {
 			cd = new ColorDrawable(LivingRoomApplication.mContext.getResources().getColor(BG_COLOR_DARK));
-			System.out.println("THEME DARK = " + BG_COLOR_DARK);
 			
 		}
 			

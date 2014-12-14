@@ -265,8 +265,6 @@ public class CollectionGalleryActivity extends FragmentActivity {
         		if(image != null){
         			//imgView.setImageBitmap(image);
         			
-        			System.out.println("GetParent() = " + (View)imgView.getParent());
-        			
         			((View) imgView.getParent()).setBackground(new BitmapDrawable(image));
         			imgView.setVisibility(View.GONE);
         			//((CollectionGalleryActivity)getActivity()).hideSystemUI();
