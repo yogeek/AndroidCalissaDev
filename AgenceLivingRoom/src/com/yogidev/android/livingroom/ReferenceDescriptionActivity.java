@@ -4,6 +4,7 @@ package com.yogidev.android.livingroom;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -394,7 +395,8 @@ public class ReferenceDescriptionActivity extends FragmentActivity implements Ac
 			
 			// Button "Visiter" to send an email
 			rootView.findViewById(R.id.btnVisiter).setOnClickListener(new View.OnClickListener() {
-	             public void onClick(View v) {
+	             @SuppressLint("StringFormatMatches")
+				public void onClick(View v) {
 	            	 
 	            	// Open email intent
 	            	 

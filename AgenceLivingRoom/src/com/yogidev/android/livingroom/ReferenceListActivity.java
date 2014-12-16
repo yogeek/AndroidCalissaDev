@@ -225,7 +225,7 @@ public class ReferenceListActivity extends ListActivity implements SwipeListView
 	        }
 	    });
 		input.setRawInputType(InputType.TYPE_CLASS_TEXT);
-		input.setTextColor(R.color.black);
+		input.setTextColor(getResources().getColor(R.color.black));
 		dialogBuilder.show();
 //	    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 	}

@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="21" />
     
     <permission
@@ -40,9 +40,16 @@
         >
         <!-- android:uiOptions="splitActionBarWhenNarrow" --> 
         
+        <!-- DEBUG API KEY -->
+        <!-- meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCQ4K_hF5hPYTzRSiCsV91_D3mDSTD0sK0" /-->
+        
+        <!--  RELEASE API KEY -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCQ4K_hF5hPYTzRSiCsV91_D3mDSTD0sK0" />
+            android:value="AIzaSyCe3Aizr5FxIRjp8v0imIE5p8AyqLYZgic" />
+        
         
         <meta-data
 		    android:name="com.google.android.gms.version"
