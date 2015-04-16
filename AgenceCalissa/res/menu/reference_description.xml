@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.yogidev.android.calissa.ReferenceListActivity" >
+
+    <item
+        android:id="@+id/action_home"
+        android:orderInCategory="100"
+        android:title="@string/action_home"
+        app:showAsAction="ifRoom"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/maison"
+        />
+    
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="110"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/partage"/>
+    	<!-- uncomment this to use the ShareActionProvider that displays the most often sharing app aside to the share icon -->
+        <!-- android:actionProviderClass=
+                "android.widget.ShareActionProvider"-->
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="120"
+        android:title="@string/action_settings"
+        app:showAsAction="never"
+        android:showAsAction="never"
+        />
+    
+</menu>

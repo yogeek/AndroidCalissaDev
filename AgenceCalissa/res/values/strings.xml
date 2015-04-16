@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Calissa Immobilier</string>
+    
+    <string name="action_settings">Paramètres</string>
+    <string name="action_home">Accueil</string>
+    <string name="day_night">Day/Night</string>
+    <string name="action_about">A propos</string>
+    <string name="action_infos">Infos</string>
+    <string name="action_saveRecherche">Enregistrer la recherche</string>
+    <string name="action_share">Partager</string>
+    
+    <string name="logo_desc">Logo de l\'application</string>
+    <string name="description">Application mobile de l\'agence immobilière Calissa Immobilier</string>
+    <string name="buttonRechercherDesc">Image pour le bouton Rechercher</string>
+    <string name="titreTrouverLogement">Trouvez votre logement</string>
+    
+    
+    <!-- Preferences -->
+    <string name="notifPrefTitle">Notifications</string>
+    <string name="notificationsPush">Notifications push</string>
+    <string name="fullScreenPrefTitle">Notifications</string>
+    <string name="fullScreenMode">Mode plein écran</string>
+    
+    <string name="titreReference">Titre de la référence</string>
+    
+    <string name="no_result">Aucun résultat !</string>
+    
+    <plurals name="numberOfResults">
+        <!--
+             As a developer, you should always supply "one" and "other"
+             strings. Your translators will know which strings are actually
+             needed for their language. Always include %d in "one" because
+             translators will need to use %d for languages where "one"
+             doesn't mean 1 (as explained above).
+          -->
+        <item quantity="one">Résultat (%d)</item>
+        <item quantity="other">Résultats (%d)</item>
+    </plurals>
+    
+    <plurals name="numberOfRecherches">
+        <item quantity="one">Recherche enregistrée (%d)</item>
+        <item quantity="other">Recherches enregistrées (%d)</item>
+    </plurals>
+    
+    <string name="boutonValider">Valider</string>
+    <string name="boutonRechercher">Rechercher</string>
+	<string name="boutonModifier">Modifier</string>
+	<string name="boutonAnnuler">Annuler</string>
+	
+	<string name="trouverUnBien">Trouver un bien</string>
+	<string name="mesRecherches">Mes recherches</string>
+	<string name="surLaCarte">Sur la carte</string>
+	<string name="contact">Contact</string>
+	<string name="accueil">Accueil</string>
+	<string name="siteWeb">Site Web</string>
+	<string name="infos">Infos</string>
+	<string name="parametres">Paramètres</string>
+	
+	<string name="choixVille">Ville</string>
+	<string name="promptVille">Choisir la ville</string>
+	<string name="choixQuartier">Quartier</string>
+	<string name="promptQuartier">Choisir le quartier</string>
+	<string name="choixType">Type</string>
+	<string name="promptType">Choisir le type</string>
+	<string name="choixLouer">A louer</string>
+	<string name="choixVendre">A vendre</string>
+	<string name="choixLoyer">Prix</string>
+	<string name="promptLoyer">Choisir le loyer</string>
+	
+	<string name="contactMailMessage">Envoyez-nous votre message en cliquant sur le lien ci-dessous.</string>
+	<string name="appeler">Appeler</string>
+	<string name="actionContactTelephone">Contacter par téléphone</string>
+    <string name="actionContactMail">Contacter par mail</string>
+    <string name="callNumber">tel:0638540923</string>
+	
+	<string name="infoAdresse">Bureaux de l\'agence: <a href="http://www.google.fr/maps/place/9+Place+Liberation,+31600+Seysses/">9 place de la libération, 31600 Seysses</a></string>
+	<string name="infoMail">calissaimmobilier@gmail.com</string>
+	<string name="infoTelephone">Téléphone: 07.87.57.36.04</string>
+	<string name="infoFax">Fax: 07.87.57.36.04</string>
+	<string name="infoSociete">CALISSA IMMOBILIER est une marque de la société USUFREE SARL au capital de 5 000 euros,
+	    Le siège social est à SEYSSES (31600), immatriculée au Registre du Commerce et des Sociétés de TOULOUSE
+	    Identifiée sous le numéro SIREN 809 328 602, titulaire de la carte G0675 délivrée par la Préfecture de Haute Garonne</string>
+	    
+	<string name="descriptionReferenceTitre">Description</string>
+	<string name="detailsReferenceTitre">Détails</string>
+	<string name="carteReferenceTitre">Sur la carte</string>
+	<string name="dummy_section_text">Section %1d is just a dummy section.</string>
+	
+	<string name="collectionGallery">Galerie de photos</string>
+	<string name="zoomGallery">Galerie de photos</string>
+	
+	<!-- Details in ReferenceDescriptionActivity -->
+	<string name="fraisAgenceLocation">- Frais d\'agence: %1$.0f€</string>
+	<string name="fraisAgenceVente">- Frais d\'agence: %1$.2f%%</string>
+	<string name="fraisAgenceNonRenseigne">- Frais d\'agence: Non renseignés</string>
+	<string name="loyerHorsCharges">- Loyer hors-charges: %1$d€</string>
+	<string name="charges">- Charges: %1$d€</string>
+	<string name="chargesCopro">- Charges copropriété: %1$d€/an</string>
+	<string name="depotGarantie">- Dépôt de garantie: %1$d€</string>
+	<string name="taxeFonciere">- Taxe foncière: %1$d€</string>
+	
+	<string name="mailSubject">Demande de visite de la référence %1$d</string>
+	<string name="mailBody">Bonjour,\n\n\
+	    Je souhaiterais visiter le bien suivant : %1$s.\n\
+	    Pouvez-vous me contacter pour fixer un rendez-vous s\'il-vous-plaît ?</string>
+	
+	<string name="message_zoom_touch_expand">Toucher une photo pour l\'agrandir</string>
+	<string name="description_zoom_touch_close">Expanded image (touch to close)</string>
+	<string name="description_image_1">Image 1</string>
+    <string name="description_image_2">Image 2</string>
+    
+    <string name="shareTo">Partager avec...</string>
+    <string name="shareReferenceMessage">J\'ai trouvé ce bien chez l\'agence Calissa Immobilier. Je pense que cela pourrait vous intéresser.\n\n\
+        Référence : %1$s\n\
+        Ville : %2$s\n\
+        Quartier : %3$s\n\
+        Type : %4$s\n\</string>
+	</resources>
